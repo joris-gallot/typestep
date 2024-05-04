@@ -1,5 +1,5 @@
 import { parse as parseTsError } from '@aivenio/tsc-output-parser';
-import { TscDiagnosticFormatted, TscDiagnosticItem, TscOutputConfig } from './types';
+import { TscDiagnosticFormatted, TscDiagnosticItem, TscOutputConfig } from '../types.js';
 
 export function parseTscOutput(tscOutput: string) {
   const finalErrors = [] as Array<TscDiagnosticFormatted>
@@ -12,7 +12,7 @@ export function parseTscOutput(tscOutput: string) {
     // If the error starts with a space, we suppose it's a continuation of the previous error
     if (tscError.startsWith(" ")) {
       const lastError = finalErrors[finalErrors.length - 1]
-      lastError.initialError += `\n${tscError}`
+      lastError.error += `\n${tscError}`
       continue
     }
 
@@ -20,7 +20,7 @@ export function parseTscOutput(tscOutput: string) {
       diagnostics = parseTsError(tscError) as Array<TscDiagnosticItem>
 
       finalErrors.push({
-        initialError: tscError,
+        error: tscError,
         diagnostics
       })
     } catch (error) {
@@ -32,13 +32,13 @@ export function parseTscOutput(tscOutput: string) {
 }
 
 function ignoreFiles(tscOuput: Array<TscDiagnosticFormatted>, files: NonNullable<TscOutputConfig['ignoredFiles']>) {
-  return tscOuput.map(({ initialError, diagnostics }) => {
+  return tscOuput.map(({ error, diagnostics }) => {
     const filteredDiagnostics = diagnostics.filter(({ value: { path: { value: path } } }) => {
       return !files.includes(path)
     })
 
     return {
-      initialError,
+      error,
       diagnostics: filteredDiagnostics
     }
   })

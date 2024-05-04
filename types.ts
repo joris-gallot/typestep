@@ -18,7 +18,7 @@ export type TscDiagnosticItem = {
 }
 
 export type TscDiagnosticFormatted = { 
-  initialError: string,
+  error: string,
   diagnostics: Array<TscDiagnosticItem>
 }
 

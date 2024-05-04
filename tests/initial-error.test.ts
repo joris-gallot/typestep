@@ -1,5 +1,5 @@
 import { assert, test } from 'vitest'
-import { getFinalOutput, parseTscOutput } from '../parser'
+import { getFinalOutput, parseTscOutput } from '../src/parser.js'
 import { readFile } from 'fs/promises'
 import { resolve } from 'path'
 
@@ -10,7 +10,7 @@ const parsedTscOutput = parseTscOutput(tscOutput)
 test('with 1 extra line', async () => {
   const finalOutput = getFinalOutput(parsedTscOutput)
 
-  const tscError = finalOutput[0].initialError
+  const tscError = finalOutput[0].error
 
   assert.lengthOf(tscError.split('\n'), 2)
 })
@@ -18,7 +18,7 @@ test('with 1 extra line', async () => {
 test('with 4 extra lines', async () => {
   const finalOutput = getFinalOutput(parsedTscOutput)
 
-  const tscError = finalOutput[3].initialError
+  const tscError = finalOutput[3].error
 
   assert.lengthOf(tscError.split('\n'), 5)
 })
@@ -26,7 +26,7 @@ test('with 4 extra lines', async () => {
 test('with 8 extra lines', async () => {
   const finalOutput = getFinalOutput(parsedTscOutput)
 
-  const tscError = finalOutput[40].initialError
+  const tscError = finalOutput[40].error
 
   assert.lengthOf(tscError.split('\n'), 9)
 })
