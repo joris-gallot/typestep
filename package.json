@@ -11,7 +11,7 @@
   },
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
-  "bin": "./dist/cli.cjs",
+  "bin": "./dist/cli.mjs",
   "files": [
     "dist"
   ],
