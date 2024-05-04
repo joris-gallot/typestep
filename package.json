@@ -35,9 +35,6 @@
   ],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@aivenio/tsc-output-parser": "^2.1.1"
-  },
   "devDependencies": {
     "@types/node": "^20.12.8",
     "unbuild": "^2.0.0",

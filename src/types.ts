@@ -1,25 +1,8 @@
-export type TscDiagnosticItem = {
-  type: 'Item',
-  value: {
-    path: {
-      type: 'Path',
-      value: string
-    },
-    cursor: { type: 'Cursor', value: { line: number, col: number } },
-    tsError: {
-      type: 'TsError',
-      value: { type: 'error', errorString: string }
-    },
-    message: {
-      type: 'Message',
-      value: string
-    }
-  }
-}
-
-export type TscDiagnosticFormatted = { 
-  error: string,
-  diagnostics: Array<TscDiagnosticItem>
+export type TscDiagnostic = {
+  path: string,
+  cursor: { line: number, column: number },
+  tsCode: string,
+  error: string
 }
 
 export type TscOutputConfig = { 

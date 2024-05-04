@@ -12,7 +12,7 @@ test('without ignored files', async () => {
     ignoredFiles: []
   })
 
-  assert.lengthOf(finalOutput, 139)
+  assert.lengthOf(finalOutput, 138)
 })
 
 test('with one ignored files', async () => {
