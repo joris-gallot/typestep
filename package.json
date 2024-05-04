@@ -25,6 +25,10 @@
     "test:watch": "vitest",
     "build": "unbuild"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joris-gallot/typestep.git"
+  },
   "keywords": [
     "tsc"
   ],
