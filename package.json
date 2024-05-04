@@ -8,7 +8,9 @@
     "node": "v20.11.1"
   },
   "scripts": {
-    "start": "vite-node main.ts"
+    "start": "vite-node main.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +20,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.8",
-    "vite-node": "^1.6.0"
+    "vite-node": "^1.6.0",
+    "vitest": "^1.6.0"
   }
 }
