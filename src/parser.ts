@@ -1,5 +1,5 @@
 import { parse as parseTsError } from '@aivenio/tsc-output-parser';
-import { TscDiagnosticFormatted, TscDiagnosticItem, TscOutputConfig } from '../types.js';
+import { TscDiagnosticFormatted, TscDiagnosticItem, TscOutputConfig } from './types.js';
 
 export function parseTscOutput(tscOutput: string) {
   const finalErrors = [] as Array<TscDiagnosticFormatted>
