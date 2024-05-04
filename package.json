@@ -1,0 +1,23 @@
+{
+  "name": "ts-migration-tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "packageManager": "pnpm@9.0.6",
+  "engines": {
+    "node": "v20.11.1"
+  },
+  "scripts": {
+    "start": "vite-node main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aivenio/tsc-output-parser": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.8",
+    "vite-node": "^1.6.0"
+  }
+}
