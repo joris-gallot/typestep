@@ -8,7 +8,7 @@
     "node": "v20.11.1"
   },
   "scripts": {
-    "start": "vite-node main.ts",
+    "playground": "vite-node playground.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },

@@ -1,22 +1,23 @@
-import { parse } from '@aivenio/tsc-output-parser';
-import { readFile } from 'fs/promises';
+import { parse as parseTsError } from '@aivenio/tsc-output-parser';
 import { TscDiagnosticFormatted, TscDiagnosticItem, TscOutputConfig } from './types';
-
-let tscOutput
-try {
-  tscOutput = await readFile('tsc-output.log', 'utf8');
-} catch (error) {
-  throw new Error('Could not read tsc-output.log');
-}
 
 export function parseTscOutput(tscOutput: string) {
   const finalErrors = [] as Array<TscDiagnosticFormatted>
+  const tscErrors = tscOutput.split('\n')
 
-  for (const tscError of tscOutput.split('\n')) {
+  for (let i = 0; i < tscErrors.length; i++) {
     let diagnostics = [] as Array<TscDiagnosticItem>
+    const tscError = tscErrors[i]
+
+    // If the error starts with a space, we suppose it's a continuation of the previous error
+    if (tscError.startsWith(" ")) {
+      const lastError = finalErrors[finalErrors.length - 1]
+      lastError.initialError += `\n${tscError}`
+      continue
+    }
 
     try {
-      diagnostics = parse(tscError) as Array<TscDiagnosticItem>
+      diagnostics = parseTsError(tscError) as Array<TscDiagnosticItem>
 
       finalErrors.push({
         initialError: tscError,
