@@ -1,5 +1,5 @@
 import { assert, test } from 'vitest'
-import { getFinalOutput, parseTscOutput } from '../src/parser.js'
+import { getFinalOutput, parseTscOutput } from '../src/index.js'
 import { readFile } from 'fs/promises'
 import { resolve } from 'path'
 

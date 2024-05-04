@@ -11,6 +11,7 @@
   },
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
+  "bin": "./dist/cli.cjs",
   "files": [
     "dist"
   ],
@@ -20,7 +21,7 @@
   },
   "scripts": {
     "playground": "vite-node src/playground.ts",
-    "parse": "vite-node src/index.ts",
+    "parse": "vite-node src/cli.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "build": "unbuild"

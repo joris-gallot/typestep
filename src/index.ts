@@ -1,27 +1,57 @@
-import { existsSync } from 'fs';
-import { parseTscOutput, getFinalOutput} from './parser.js'
-import { readFile } from 'fs/promises';
+import { parse as parseTsError } from '@aivenio/tsc-output-parser';
+import { TscDiagnosticFormatted, TscDiagnosticItem, TscOutputConfig } from './types.js';
 
-const args = process.argv.slice(2);
+export function parseTscOutput(tscOutput: string) {
+  const finalErrors = [] as Array<TscDiagnosticFormatted>
+  const tscErrors = tscOutput.split('\n')
 
-if (args.length === 0) {
-  console.log('No tsc output file provided');
-  process.exit(1);
-}
+  for (let i = 0; i < tscErrors.length; i++) {
+    let diagnostics = [] as Array<TscDiagnosticItem>
+    const tscError = tscErrors[i]
 
-const tscOutputPath = args[0];
+    // If the error starts with a space, we suppose it's a continuation of the previous error
+    if (tscError.startsWith(" ")) {
+      const lastError = finalErrors[finalErrors.length - 1]
+      lastError.error += `\n${tscError}`
+      continue
+    }
 
-if (!existsSync(tscOutputPath)) {
-  console.log(`File ${tscOutputPath} does not exist`);
-  process.exit(1);
-}
+    try {
+      diagnostics = parseTsError(tscError) as Array<TscDiagnosticItem>
 
-async function main() {
-  const tscOutput = await readFile(tscOutputPath, 'utf8');
-  const parsedTscOutput = parseTscOutput(tscOutput);
+      finalErrors.push({
+        error: tscError,
+        diagnostics
+      })
+    } catch (error) {
+      // Ignore error for now
+    }
+  }
   
-  const errors = getFinalOutput(parsedTscOutput).map(({ error }) => error);
-  console.error(errors.join('\n')); 
+  return finalErrors
 }
 
-main();
+function ignoreFiles(tscOuput: Array<TscDiagnosticFormatted>, files: NonNullable<TscOutputConfig['ignoredFiles']>) {
+  return tscOuput.map(({ error, diagnostics }) => {
+    const filteredDiagnostics = diagnostics.filter(({ value: { path: { value: path } } }) => {
+      return !files.includes(path)
+    })
+
+    return {
+      error,
+      diagnostics: filteredDiagnostics
+    }
+  })
+  .filter(({ diagnostics }) => diagnostics.length > 0)
+}
+
+export function getFinalOutput(parsedTscOutput: Array<TscDiagnosticFormatted>, config?: TscOutputConfig) {
+  const { ignoredFiles = [] } = config || {}
+  let finalOutput = parsedTscOutput
+
+  if (ignoredFiles.length > 0) {
+    finalOutput = ignoreFiles(finalOutput, ignoredFiles)
+  }
+
+  return finalOutput
+}

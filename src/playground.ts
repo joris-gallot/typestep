@@ -1,5 +1,5 @@
 import { readFile } from 'fs/promises';
-import { parseTscOutput } from './parser.js';
+import { parseTscOutput } from './index.js';
 import { resolve } from 'path';
 
 let tscOutput
