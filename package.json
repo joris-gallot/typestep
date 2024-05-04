@@ -1,6 +1,6 @@
 {
   "name": "typestep",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "type": "module",
   "exports": {
@@ -25,7 +25,9 @@
     "test:watch": "vitest",
     "build": "unbuild"
   },
-  "keywords": ["tsc"],
+  "keywords": [
+    "tsc"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
