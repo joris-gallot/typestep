@@ -1,7 +1,7 @@
 {
   "name": "typestep",
   "version": "0.0.1",
-  "description": "",
+  "description": "Simplifies JavaScript to TypeScript migration with incremental changes",
   "type": "module",
   "exports": {
     ".": {
