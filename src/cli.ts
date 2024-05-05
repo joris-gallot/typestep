@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import process from 'node:process'
 import type { TypestepConfig } from './types.js'
-import { tryImport } from './utils.js'
+import { tryImport, tscDiagnosticToTscError } from './utils.js'
 import { getFinalOutput, parseTscOutput } from './index.js'
 
 function getTscOutputPath() {
@@ -48,14 +48,14 @@ async function run() {
   const configFile = await readConfigFile()
   const parsedTscOutput = parseTscOutput(tscOutput)
 
-  const errors = getFinalOutput(parsedTscOutput, configFile).map(({ error }) => error)
+  const tscDiagnostics = getFinalOutput(parsedTscOutput, configFile)
 
-  if (errors.length === 0) {
+  if (tscDiagnostics.length === 0) {
     console.log('No tsc errors found')
     return
   }
 
-  console.error(errors.join('\n'))
+  console.error(tscDiagnostics.map(tscDiagnosticToTscError).join('\n'))
   process.exit(1)
 }
 
