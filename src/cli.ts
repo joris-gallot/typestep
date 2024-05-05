@@ -21,7 +21,14 @@ async function main() {
   const parsedTscOutput = parseTscOutput(tscOutput);
   
   const errors = getFinalOutput(parsedTscOutput).map(({ error }) => error);
+
+  if (errors.length === 0) {
+    console.log('No tsc errors found');
+    return;
+  }
+
   console.error(errors.join('\n')); 
+  process.exit(1);
 }
 
 main();
