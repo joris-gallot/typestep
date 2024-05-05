@@ -1,7 +1,7 @@
+import { readFile } from 'node:fs/promises'
+import { resolve } from 'node:path'
 import { assert, test } from 'vitest'
 import { getFinalOutput, parseTscOutput } from '../src/index.js'
-import { readFile } from 'fs/promises'
-import { resolve } from 'path'
 
 const tscOutputPath = resolve(__dirname, 'fixtures', 'tsc-output.log')
 const tscOutput = await readFile(tscOutputPath, 'utf8')

@@ -1,8 +1,18 @@
 {
   "name": "typestep",
-  "version": "0.0.1",
-  "description": "Simplifies JavaScript to TypeScript migration with incremental changes",
   "type": "module",
+  "version": "0.0.1",
+  "packageManager": "pnpm@9.0.6",
+  "description": "Simplifies JavaScript to TypeScript migration with incremental changes",
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joris-gallot/typestep.git"
+  },
+  "keywords": [
+    "tsc"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
@@ -15,7 +25,6 @@
   "files": [
     "dist"
   ],
-  "packageManager": "pnpm@9.0.6",
   "engines": {
     "node": "v20.11.1"
   },
@@ -24,19 +33,14 @@
     "parse": "vite-node src/cli.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "build": "unbuild"
+    "build": "unbuild",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/joris-gallot/typestep.git"
-  },
-  "keywords": [
-    "tsc"
-  ],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
+    "@antfu/eslint-config": "^2.16.1",
     "@types/node": "^20.12.8",
+    "eslint": "^9.2.0",
     "unbuild": "^2.0.0",
     "vite-node": "^1.6.0",
     "vitest": "^1.6.0"
