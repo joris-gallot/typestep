@@ -55,8 +55,8 @@ async function run() {
     return
   }
 
-  console.error(errors.length)
-  // process.exit(0);
+  console.error(errors.join('\n'))
+  process.exit(0)
 }
 
 run()
