@@ -29,20 +29,22 @@
     "node": "v20.11.1"
   },
   "scripts": {
-    "playground": "vite-node src/playground.ts",
-    "parse": "vite-node src/cli.ts",
+    "playground": "jiti src/playground.ts",
+    "cli": "jiti src/cli.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "build": "unbuild",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
+  "dependencies": {
+    "jiti": "^1.21.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^2.16.1",
     "@types/node": "^20.12.8",
     "eslint": "^9.2.0",
     "unbuild": "^2.0.0",
-    "vite-node": "^1.6.0",
     "vitest": "^1.6.0"
   }
 }

@@ -5,6 +5,6 @@ export type TscDiagnostic = {
   error: string
 }
 
-export type TscOutputConfig = { 
+export type TypestepConfig = { 
   ignoredFiles?: string[]
 }

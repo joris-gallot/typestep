@@ -1,4 +1,4 @@
-import { TscDiagnostic, TscOutputConfig } from './types.js';
+import { TscDiagnostic, TypestepConfig } from './types.js';
 
 function parseTsError(tscError: string): TscDiagnostic {
   const regex = /([^()\n]+)\((\d+),(\d+)\):\s+error\s+(TS\d+):\s+(.*)/;
@@ -43,7 +43,7 @@ export function parseTscOutput(tscOutput: string) {
   return finalErrors
 }
 
-export function getFinalOutput(parsedTscOutput: Array<TscDiagnostic>, config?: TscOutputConfig) {
+export function getFinalOutput(parsedTscOutput: Array<TscDiagnostic>, config?: TypestepConfig) {
   const { ignoredFiles = [] } = config || {}
   let finalOutput = parsedTscOutput
 

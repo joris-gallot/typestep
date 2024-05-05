@@ -8,6 +8,15 @@ Typestep aims to simplify the migration process from JavaScript to TypeScript in
 npm install -g typestep
 ```
 
+### Config file
+
+```ts
+// typestep.config.ts
+export default {
+  ignoredFiles: ['src/main.ts']
+}
+```
+
 ```bash
 tsc > tsc-output.log
 ```
