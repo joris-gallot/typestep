@@ -56,7 +56,7 @@ async function run() {
   }
 
   console.error(errors.join('\n'))
-  process.exit(0)
+  process.exit(1)
 }
 
 run()
