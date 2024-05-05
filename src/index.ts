@@ -1,21 +1,20 @@
-import { TscDiagnostic, TypestepConfig } from './types.js';
+import type { TscDiagnostic, TypestepConfig } from './types.js'
 
 function parseTsError(tscError: string): TscDiagnostic {
-  const regex = /([^()\n]+)\((\d+),(\d+)\):\s+error\s+(TS\d+):\s+(.*)/;
-  const [_, file, line, column, tsCode, error]  = regex.exec(tscError) || []
+  const regex = /([^()\n]+)\((\d+),(\d+)\):\s+error\s+(TS\d+):\s+(.*)/
+  const [_, file, line, column, tsCode, error] = regex.exec(tscError) || []
 
-  if (!file || !line || !column || !tsCode || !error) {
+  if (!file || !line || !column || !tsCode || !error)
     throw new Error('Invalid error format')
-  }
 
   return {
     path: file,
     cursor: {
-      line: parseInt(line),
-      column: parseInt(column)
+      line: Number.parseInt(line),
+      column: Number.parseInt(column),
     },
     error,
-    tsCode
+    tsCode,
   }
 }
 
@@ -27,7 +26,7 @@ export function parseTscOutput(tscOutput: string) {
     const tscError = tscErrors[i]
 
     // If the error starts with a space, we suppose it's a continuation of the previous error
-    if (tscError.startsWith(" ")) {
+    if (tscError.startsWith(' ')) {
       const lastError = finalErrors[finalErrors.length - 1]
       lastError.error += `\n${tscError}`
       continue
@@ -35,11 +34,12 @@ export function parseTscOutput(tscOutput: string) {
 
     try {
       finalErrors.push(parseTsError(tscError))
-    } catch (error) {
+    }
+    catch (error) {
       // Ignore error for now
     }
   }
-  
+
   return finalErrors
 }
 
@@ -47,9 +47,8 @@ export function getFinalOutput(parsedTscOutput: Array<TscDiagnostic>, config?: T
   const { ignoredFiles = [] } = config || {}
   let finalOutput = parsedTscOutput
 
-  if (ignoredFiles.length > 0) {
+  if (ignoredFiles.length > 0)
     finalOutput = finalOutput.filter(({ path }) => !ignoredFiles.includes(path))
-  }
 
   return finalOutput
 }
