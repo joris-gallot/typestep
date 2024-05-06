@@ -9,9 +9,10 @@ import { defineCommand, runMain } from 'citty'
 import type { TypestepConfig } from '../types.js'
 import { tryImport, tscDiagnosticToTscError } from '../utils.js'
 import { getFinalOutput, parseTscOutput } from '../index.js'
+import { CONFIG_FILE_NAME } from '../constants.js'
 
 async function readConfigFile() {
-  const configFile = resolve(process.cwd(), 'typestep.config.ts')
+  const configFile = resolve(process.cwd(), CONFIG_FILE_NAME)
 
   if (!existsSync(configFile)) {
     console.log('No config file found')
@@ -52,7 +53,8 @@ export default defineCommand({
   args: {
     tsc_output_file: {
       type: 'positional',
-
+      description: 'The tsc output file path to be processed',
+      required: true,
     },
   },
   run({ args }) {
