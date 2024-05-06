@@ -4,7 +4,8 @@ Typestep aims to simplify the migration process from JavaScript to TypeScript in
 
 **⚠️ Work in Progress ⚠️**
 
-This project is currently under active development and is not yet considered stable
+> [!WARNING]
+> This project is currently under active development and is not yet considered stable
 
 ## Usage
 
@@ -12,7 +13,22 @@ This project is currently under active development and is not yet considered sta
 npm install -g typestep
 ```
 
-### Config file
+> [!WARNING]
+> Do Not Use `--pretty` option with `tsc`
+```bash
+tsc > tsc-output.log
+```
+
+### Init config file
+
+> [!NOTE]
+> Initialize the Typestep configuration file with all files from the tsc output marked as ignored
+
+```bash
+typestep init tsc-output.log
+```
+
+### Or create your config file
 
 ```ts
 // typestep.config.ts
@@ -21,11 +37,8 @@ export default {
 }
 ```
 
-⚠️ **Do Not Use `--pretty` option with `tsc`**
-```bash
-tsc > tsc-output.log
-```
+### Run typestep
 
 ```bash
-typestep tsc-output.log
+typestep run tsc-output.log
 ```
