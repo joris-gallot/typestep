@@ -5,7 +5,7 @@
   "packageManager": "pnpm@9.0.6",
   "description": "Simplifies JavaScript to TypeScript migration with incremental changes",
   "author": "Joris Gallot",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joris-gallot/typestep.git"
