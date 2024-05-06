@@ -25,9 +25,9 @@ export function parseTscOutput(tscOutput: string) {
   for (let i = 0; i < tscErrors.length; i++) {
     const tscError = tscErrors[i]
 
+    const lastError = finalErrors[finalErrors.length - 1]
     // If the error starts with a space, we suppose it's a continuation of the previous error
-    if (tscError.startsWith(' ')) {
-      const lastError = finalErrors[finalErrors.length - 1]
+    if (tscError.startsWith(' ') && lastError) {
       lastError.error += `\n${tscError}`
       continue
     }
