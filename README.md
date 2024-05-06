@@ -21,6 +21,7 @@ export default {
 }
 ```
 
+⚠️ **Do Not Use `--pretty` option with `tsc`**
 ```bash
 tsc > tsc-output.log
 ```
