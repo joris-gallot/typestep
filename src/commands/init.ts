@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import { existsSync } from 'node:fs'
 import { readFile, writeFile } from 'node:fs/promises'
+import { resolve } from 'node:path'
+import process from 'node:process'
 import { defineCommand } from 'citty'
 import { parseTscOutput } from '../index.js'
 import { writeTypestepConfig } from '../utils.js'
@@ -35,6 +37,6 @@ export default defineCommand({
     if (existsSync(CONFIG_FILE_NAME))
       throw new Error('Typestep config file already exists')
 
-    init(args.tsc_output_file)
+    init(resolve(process.cwd(), args.tsc_output_file))
   },
 })

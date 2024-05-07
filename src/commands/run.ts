@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import process from 'node:process'
-import { defineCommand, runMain } from 'citty'
+import { defineCommand } from 'citty'
 
 import type { TypestepConfig } from '../types.js'
 import { tryImport, tscDiagnosticToTscError } from '../utils.js'
@@ -61,6 +61,6 @@ export default defineCommand({
     if (!existsSync(args.tsc_output_file))
       throw new Error('Tsc output file not found')
 
-    run(args.tsc_output_file)
+    run(resolve(process.cwd(), args.tsc_output_file))
   },
 })
