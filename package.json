@@ -41,6 +41,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "citty": "^0.1.6",
     "jiti": "^1.21.0"
   },
   "devDependencies": {

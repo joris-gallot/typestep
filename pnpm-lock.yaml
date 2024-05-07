@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      citty:
+        specifier: ^0.1.6
+        version: 0.1.6
       jiti:
         specifier: ^1.21.0
         version: 1.21.0
