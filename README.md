@@ -2,8 +2,6 @@
 
 Typestep aims to simplify the migration process from JavaScript to TypeScript in existing projects by offering a gradual transition strategy. It allows developers to introduce TypeScript incrementally by leveraging the parsing of TypeScript compiler output (tsc)
 
-**⚠️ Work in Progress ⚠️**
-
 > [!WARNING]
 > This project is currently under active development and is not yet considered stable
 
@@ -19,16 +17,18 @@ npm install -g typestep
 tsc > tsc-output.log
 ```
 
-### Init config file
+### Config file
+
+#### Init config file
 
 > [!NOTE]
-> Initialize the Typestep configuration file with all files from the tsc output marked as ignored
+> Init command will create your Typestep config file with all files from the tsc output marked as ignored
 
 ```bash
 typestep init tsc-output.log
 ```
 
-### Or create your config file
+#### Or create your config file
 
 ```ts
 // typestep.config.ts
