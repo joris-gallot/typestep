@@ -24,3 +24,7 @@ export function tscDiagnosticToTscError(diag: TscError) {
 export function writeTypestepConfig(config: TypestepConfig) {
   return `export default ${JSON.stringify(config, null, 2)}`
 }
+
+export function uniqArray<T>(array?: Array<T>) {
+  return [...new Set(array || [])]
+}

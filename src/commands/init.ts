@@ -5,7 +5,7 @@ import { resolve } from 'node:path'
 import process from 'node:process'
 import { defineCommand } from 'citty'
 import { parseTscOutput } from '../index.js'
-import { writeTypestepConfig } from '../utils.js'
+import { uniqArray, writeTypestepConfig } from '../utils.js'
 import { CONFIG_FILE_NAME } from '../constants.js'
 import type { TypestepConfig } from '../types.js'
 
@@ -13,7 +13,7 @@ export async function generateInitialConfig(tscOutputFile: string): Promise<Type
   const tscOutput = await readFile(tscOutputFile, 'utf8')
   const parsedTscOutput = parseTscOutput(tscOutput)
 
-  const ignoredFiles = [...new Set(parsedTscOutput.map(({ path }) => path))]
+  const ignoredFiles = uniqArray(parsedTscOutput.map(({ path }) => path))
 
   return { ignoredFiles }
 }

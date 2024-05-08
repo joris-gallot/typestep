@@ -8,8 +8,8 @@ import { defineCommand } from 'citty'
 
 import { consola } from 'consola'
 import type { TypestepConfig } from '../types.js'
-import { tryImport, tscDiagnosticToTscError } from '../utils.js'
-import { getTscErrors, parseTscOutput } from '../index.js'
+import { tryImport } from '../utils.js'
+import { checkConfig, getOutput, getTscErrors, parseTscOutput } from '../index.js'
 import { CONFIG_FILE_NAME } from '../constants.js'
 
 async function readConfigFile() {
@@ -32,29 +32,15 @@ async function readConfigFile() {
 
 async function run(tscOutputFile: string) {
   const tscOutput = await readFile(tscOutputFile, 'utf8')
-  const configFile = await readConfigFile()
+  const config = await readConfigFile()
   const parsedTscOutput = parseTscOutput(tscOutput)
 
-  const { tscErrors, ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, configFile)
+  if (config)
+    checkConfig(config)
 
-  const ignoredFilesHasErrors = ignoredFilesWithoutErrors.length > 0
-  const tscHasErrors = tscErrors.length > 0
-  const outputHasErrors = tscHasErrors || ignoredFilesHasErrors
+  const exit = getOutput(getTscErrors(parsedTscOutput, config), config)
 
-  if (ignoredFilesHasErrors)
-    consola.error(`The following files were ignored in the config but had no errors in the tsc output: ${ignoredFilesWithoutErrors.join(', ')}`)
-
-  if (tscHasErrors) {
-    const errorFiles = [...new Set(tscErrors.map(({ path }) => path))]
-
-    consola.error(`Found ${tscErrors.length} tsc errors in ${errorFiles.length} files:`)
-    consola.box(errorFiles.join('\n'))
-
-    if (configFile?.fullOutput)
-      consola.log(tscErrors.map(tscDiagnosticToTscError).join('\n'))
-  }
-
-  if (outputHasErrors)
+  if (exit)
     process.exit(1)
 
   consola.success('No tsc errors found')
