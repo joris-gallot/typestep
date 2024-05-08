@@ -15,8 +15,8 @@ export function tryImport(file: string, rootDir: string = process.cwd()) {
   }
 }
 
-export function tscDiagnosticToTscError(diag: TscError) {
-  const { path, cursor, tsCode, error } = diag
+export function tscErrorToString(tscError: TscError) {
+  const { path, cursor, tsCode, error } = tscError
 
   return `${path}(${cursor.line},${cursor.column}): error ${tsCode}: ${error}`
 }

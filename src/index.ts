@@ -1,6 +1,6 @@
 import consola from 'consola'
 import type { TscError, TypestepConfig } from './types.js'
-import { tscDiagnosticToTscError, uniqArray } from './utils.js'
+import { tscErrorToString, uniqArray } from './utils.js'
 
 export function parseTsError(tscError: string): TscError {
   const regex = /([^()\n]+)\((\d+),(\d+)\):\s+error\s+(TS\d+):\s+(.*)/
@@ -78,7 +78,7 @@ export function getOutput({ tscErrors, ignoredFilesWithoutErrors }: ReturnType<t
     consola.box(errorFiles.join('\n'))
 
     if (config?.fullOutput)
-      consola.log(tscErrors.map(tscDiagnosticToTscError).join('\n'))
+      consola.log(tscErrors.map(tscErrorToString).join('\n'))
   }
 
   return outputHasErrors
