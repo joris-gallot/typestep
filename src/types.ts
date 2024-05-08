@@ -1,4 +1,4 @@
-export interface TscDiagnostic {
+export interface TscError {
   path: string
   cursor: { line: number, column: number }
   tsCode: string
@@ -7,4 +7,5 @@ export interface TscDiagnostic {
 
 export interface TypestepConfig {
   ignoredFiles?: string[]
+  fullOutput?: boolean
 }

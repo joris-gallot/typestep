@@ -1,6 +1,6 @@
-import type { TscDiagnostic, TypestepConfig } from './types.js'
+import type { TscError, TypestepConfig } from './types.js'
 
-function parseTsError(tscError: string): TscDiagnostic {
+function parseTsError(tscError: string): TscError {
   const regex = /([^()\n]+)\((\d+),(\d+)\):\s+error\s+(TS\d+):\s+(.*)/
   const [_, file, line, column, tsCode, error] = regex.exec(tscError) || []
 
@@ -19,7 +19,7 @@ function parseTsError(tscError: string): TscDiagnostic {
 }
 
 export function parseTscOutput(tscOutput: string) {
-  const finalErrors = [] as Array<TscDiagnostic>
+  const finalErrors = [] as Array<TscError>
   const tscErrors = tscOutput.split('\n')
 
   for (let i = 0; i < tscErrors.length; i++) {
@@ -43,12 +43,18 @@ export function parseTscOutput(tscOutput: string) {
   return finalErrors
 }
 
-export function getFinalOutput(parsedTscOutput: Array<TscDiagnostic>, config?: TypestepConfig) {
+export function getTscErrors(parsedTscOutput: Array<TscError>, config?: TypestepConfig) {
   const { ignoredFiles = [] } = config || {}
-  let finalOutput = parsedTscOutput
+  let tscErrors = parsedTscOutput
+  let ignoredFilesWithoutErrors
 
-  if (ignoredFiles.length > 0)
-    finalOutput = finalOutput.filter(({ path }) => !ignoredFiles.includes(path))
+  if (ignoredFiles.length > 0) {
+    ignoredFilesWithoutErrors = ignoredFiles.filter(ignoredFile => !parsedTscOutput.some(({ path }) => path === ignoredFile))
+    tscErrors = tscErrors.filter(({ path }) => !ignoredFiles.includes(path))
+  }
 
-  return finalOutput
+  return {
+    tscErrors,
+    ignoredFilesWithoutErrors: [...new Set(ignoredFilesWithoutErrors)],
+  }
 }

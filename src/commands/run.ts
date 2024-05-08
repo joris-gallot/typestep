@@ -1,28 +1,29 @@
 #!/usr/bin/env node
-/* eslint-disable no-console */
+
 import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import process from 'node:process'
 import { defineCommand } from 'citty'
 
+import { consola } from 'consola'
 import type { TypestepConfig } from '../types.js'
 import { tryImport, tscDiagnosticToTscError } from '../utils.js'
-import { getFinalOutput, parseTscOutput } from '../index.js'
+import { getTscErrors, parseTscOutput } from '../index.js'
 import { CONFIG_FILE_NAME } from '../constants.js'
 
 async function readConfigFile() {
   const configFile = resolve(process.cwd(), CONFIG_FILE_NAME)
 
   if (!existsSync(configFile)) {
-    console.log('No config file found')
+    consola.info('Running without a config file')
     return
   }
 
   const configModule = await tryImport(configFile)
 
   if (!configModule?.default) {
-    console.log('No default export found in config file')
+    consola.warn('No default export found in config file')
     return
   }
 
@@ -34,15 +35,29 @@ async function run(tscOutputFile: string) {
   const configFile = await readConfigFile()
   const parsedTscOutput = parseTscOutput(tscOutput)
 
-  const tscDiagnostics = getFinalOutput(parsedTscOutput, configFile)
+  const { tscErrors, ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, configFile)
 
-  if (tscDiagnostics.length === 0) {
-    console.log('No tsc errors found')
-    return
+  const ignoredFilesHasErrors = ignoredFilesWithoutErrors.length > 0
+  const tscHasErrors = tscErrors.length > 0
+  const outputHasErrors = tscHasErrors || ignoredFilesHasErrors
+
+  if (ignoredFilesHasErrors)
+    consola.error(`The following files were ignored in the config but had no errors in the tsc output: ${ignoredFilesWithoutErrors.join(', ')}`)
+
+  if (tscHasErrors) {
+    const errorFiles = [...new Set(tscErrors.map(({ path }) => path))]
+
+    consola.error(`Found ${tscErrors.length} tsc errors in ${errorFiles.length} files:`)
+    consola.box(errorFiles.join('\n'))
+
+    if (configFile?.fullOutput)
+      consola.log(tscErrors.map(tscDiagnosticToTscError).join('\n'))
   }
 
-  console.error(tscDiagnostics.map(tscDiagnosticToTscError).join('\n'))
-  process.exit(1)
+  if (outputHasErrors)
+    process.exit(1)
+
+  consola.success('No tsc errors found')
 }
 
 export default defineCommand({

@@ -1,6 +1,6 @@
 import process from 'node:process'
 import jiti from 'jiti'
-import type { TscDiagnostic, TypestepConfig } from './types.js'
+import type { TscError, TypestepConfig } from './types.js'
 
 export function tryImport(file: string, rootDir: string = process.cwd()) {
   // @ts-expect-error "This expression is not callable." but works fine
@@ -15,7 +15,7 @@ export function tryImport(file: string, rootDir: string = process.cwd()) {
   }
 }
 
-export function tscDiagnosticToTscError(diag: TscDiagnostic) {
+export function tscDiagnosticToTscError(diag: TscError) {
   const { path, cursor, tsCode, error } = diag
 
   return `${path}(${cursor.line},${cursor.column}): error ${tsCode}: ${error}`
