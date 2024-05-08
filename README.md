@@ -33,7 +33,8 @@ typestep init tsc-output.log
 ```ts
 // typestep.config.ts
 export default {
-  ignoredFiles: ['src/main.ts']
+  ignoredFiles: ['src/main.ts'], // files to ignore
+  fullOutput: false, // get full output errors (default: false)
 }
 ```
 
