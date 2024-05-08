@@ -33,12 +33,17 @@ async function readConfigFile() {
 async function run(tscOutputFile: string) {
   const tscOutput = await readFile(tscOutputFile, 'utf8')
   const config = await readConfigFile()
-  const parsedTscOutput = parseTscOutput(tscOutput)
 
   if (config)
     checkConfig(config)
 
-  const exit = getOutput(getTscErrors(parsedTscOutput, config), config)
+  consola.start('Processing tsc output file')
+  const parsedTscOutput = parseTscOutput(tscOutput)
+
+  const errors = getTscErrors(parsedTscOutput, config)
+  consola.info(`${parsedTscOutput.length - errors.tscErrors.length} errors ignored`)
+
+  const exit = getOutput(errors, config)
 
   if (exit)
     process.exit(1)
