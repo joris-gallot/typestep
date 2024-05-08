@@ -7,15 +7,20 @@ import { defineCommand } from 'citty'
 import { parseTscOutput } from '../index.js'
 import { writeTypestepConfig } from '../utils.js'
 import { CONFIG_FILE_NAME } from '../constants.js'
+import type { TypestepConfig } from '../types.js'
 
-async function init(tscOutputFile: string) {
+export async function generateInitialConfig(tscOutputFile: string): Promise<TypestepConfig> {
   const tscOutput = await readFile(tscOutputFile, 'utf8')
   const parsedTscOutput = parseTscOutput(tscOutput)
 
   const ignoredFiles = [...new Set(parsedTscOutput.map(({ path }) => path))]
-  const configFileContent = writeTypestepConfig({ ignoredFiles })
 
-  return writeFile(CONFIG_FILE_NAME, configFileContent)
+  return { ignoredFiles }
+}
+
+async function initConfig(tscOutputFile: string) {
+  const config = await generateInitialConfig(tscOutputFile)
+  return writeFile(CONFIG_FILE_NAME, writeTypestepConfig(config))
 }
 
 export default defineCommand({
@@ -37,6 +42,6 @@ export default defineCommand({
     if (existsSync(CONFIG_FILE_NAME))
       throw new Error('Typestep config file already exists')
 
-    init(resolve(process.cwd(), args.tsc_output_file))
+    initConfig(resolve(process.cwd(), args.tsc_output_file))
   },
 })
