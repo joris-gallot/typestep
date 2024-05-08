@@ -2,7 +2,7 @@ import consola from 'consola'
 import type { TscError, TypestepConfig } from './types.js'
 import { tscDiagnosticToTscError, uniqArray } from './utils.js'
 
-function parseTsError(tscError: string): TscError {
+export function parseTsError(tscError: string): TscError {
   const regex = /([^()\n]+)\((\d+),(\d+)\):\s+error\s+(TS\d+):\s+(.*)/
   const [_, file, line, column, tsCode, error] = regex.exec(tscError) || []
 
