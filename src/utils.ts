@@ -22,7 +22,9 @@ export function tscErrorToString(tscError: TscError) {
 }
 
 export function writeTypestepConfig(config: TypestepConfig) {
-  return `export default ${JSON.stringify(config, null, 2)}`
+  return `import type { TypestepConfig } from 'typestep'
+  
+export default ${JSON.stringify(config, null, 2)} satisfies TypestepConfig`
 }
 
 export function uniqArray<T>(array?: Array<T>) {

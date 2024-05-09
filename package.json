@@ -13,6 +13,7 @@
   "keywords": [
     "tsc"
   ],
+  "types": "dist/types.d.ts",
   "bin": {
     "typestep": "dist/cli.mjs"
   },

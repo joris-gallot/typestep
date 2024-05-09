@@ -4,6 +4,7 @@ import { readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import process from 'node:process'
 import { defineCommand } from 'citty'
+import consola from 'consola'
 import { parseTscOutput } from '../index.js'
 import { uniqArray, writeTypestepConfig } from '../utils.js'
 import { CONFIG_FILE_NAME } from '../constants.js'
@@ -20,7 +21,14 @@ export async function generateInitialConfig(tscOutputFile: string): Promise<Type
 
 async function initConfig(tscOutputFile: string) {
   const config = await generateInitialConfig(tscOutputFile)
-  return writeFile(CONFIG_FILE_NAME, writeTypestepConfig(config))
+
+  try {
+    await writeFile(CONFIG_FILE_NAME, writeTypestepConfig(config))
+    consola.success('Typestep config file created')
+  }
+  catch (error) {
+    consola.error('Error creating Typestep config file', error)
+  }
 }
 
 export default defineCommand({
