@@ -2,9 +2,6 @@
 
 Typestep aims to simplify the migration process from JavaScript to TypeScript in existing projects by offering a gradual transition strategy. It allows developers to introduce TypeScript incrementally by leveraging the parsing of TypeScript compiler output (tsc)
 
-> [!WARNING]
-> This project is currently under active development and is not yet considered stable
-
 ## Usage
 
 ```bash
