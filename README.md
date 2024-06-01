@@ -8,7 +8,7 @@ Typestep aims to simplify the migration process from JavaScript to TypeScript in
 ## Usage
 
 ```bash
-npm install -g typestep
+npm install typestep --save-dev
 ```
 
 > [!WARNING]
