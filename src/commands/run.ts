@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
+import type { TypestepConfig } from '../types.js'
 import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import process from 'node:process'
-import { defineCommand } from 'citty'
 
+import { defineCommand } from 'citty'
 import { consola } from 'consola'
-import type { TypestepConfig } from '../types.js'
-import { tryImport } from '../utils.js'
-import { checkConfig, getOutput, getTscErrors, parseTscOutput } from '../index.js'
 import { CONFIG_FILE_NAME } from '../constants.js'
+import { checkConfig, getOutput, getTscErrors, parseTscOutput } from '../index.js'
+import { tryImport } from '../utils.js'
 
 async function readConfigFile() {
   const configFile = resolve(process.cwd(), CONFIG_FILE_NAME)

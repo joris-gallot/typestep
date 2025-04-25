@@ -1,6 +1,6 @@
+import type { TscError, TypestepConfig } from './types.js'
 import process from 'node:process'
 import jiti from 'jiti'
-import type { TscError, TypestepConfig } from './types.js'
 
 export function tryImport(file: string, rootDir: string = process.cwd()) {
   // @ts-expect-error "This expression is not callable." but works fine

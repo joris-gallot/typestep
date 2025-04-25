@@ -1,5 +1,5 @@
-import consola from 'consola'
 import type { TscError, TypestepConfig } from './types.js'
+import consola from 'consola'
 import { tscErrorToString, uniqArray } from './utils.js'
 
 export function parseTsError(tscError: string): TscError {
@@ -37,6 +37,7 @@ export function parseTscOutput(tscOutput: string) {
     try {
       finalErrors.push(parseTsError(tscError))
     }
+    // eslint-disable-next-line unused-imports/no-unused-vars
     catch (error) {
       // Ignore error for now
     }

@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 import { defineCommand, runMain } from 'citty'
-import { version } from '../package.json'
+import packageJson from '../package.json' with { type: 'json' }
 
 const main = defineCommand({
   meta: {
     name: 'typestep',
-    version,
+    version: packageJson.version,
     description: 'CLI tool to filter tsc output',
   },
   subCommands: {

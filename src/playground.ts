@@ -9,7 +9,7 @@ async function run() {
     tscOutput = await readFile(resolve(__dirname, '..', 'tsc-output.log'), 'utf8')
   }
   catch (error) {
-    throw new Error('Could not read tsc-output.log')
+    throw new Error('Could not read tsc-output.log', { cause: error })
   }
 
   const parsedTscOutput = parseTscOutput(tscOutput)

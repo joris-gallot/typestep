@@ -133,3 +133,5 @@ dist
 
 # ignore typestep config for testing
 typestep.config.ts
+
+.DS_Store

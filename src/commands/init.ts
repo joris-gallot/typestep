@@ -1,14 +1,14 @@
 #!/usr/bin/env node
+import type { TypestepConfig } from '../types.js'
 import { existsSync } from 'node:fs'
 import { readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import process from 'node:process'
 import { defineCommand } from 'citty'
 import consola from 'consola'
+import { CONFIG_FILE_NAME } from '../constants.js'
 import { parseTscOutput } from '../index.js'
 import { uniqArray, writeTypestepConfig } from '../utils.js'
-import { CONFIG_FILE_NAME } from '../constants.js'
-import type { TypestepConfig } from '../types.js'
 
 export async function generateInitialConfig(tscOutputFile: string): Promise<TypestepConfig> {
   const tscOutput = await readFile(tscOutputFile, 'utf8')
