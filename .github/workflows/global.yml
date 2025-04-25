@@ -15,18 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v2.4.0
-        with:
-          package_json_file: package.json
-
-      - name: Install
-        run: pnpm install --frozen-lockfile
+      - name: Setup Environment
+        uses: ./.github/actions/setup
 
       - name: Typecheck
         run: pnpm typecheck
@@ -37,18 +27,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v2.4.0
-        with:
-          package_json_file: package.json
-
-      - name: Install
-        run: pnpm install --frozen-lockfile
+      - name: Setup Environment
+        uses: ./.github/actions/setup
 
       - name: Lint
         run: pnpm lint
@@ -59,18 +39,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v2.4.0
-        with:
-          package_json_file: package.json
-
-      - name: Install
-        run: pnpm install --frozen-lockfile
+      - name: Setup Environment
+        uses: ./.github/actions/setup
 
       - name: Tests
         run: pnpm test
