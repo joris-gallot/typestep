@@ -50,6 +50,7 @@ export function getTscErrors(parsedTscOutput: Array<TscError>, config?: Typestep
   const { ignoredFiles = [], ignoredTsErrorCodes = [] } = config || {}
   let tscErrors = parsedTscOutput
   let ignoredFilesWithoutErrors
+  let ignoredTsErrorCodesWithoutErrors
 
   if (ignoredFiles.length > 0) {
     ignoredFilesWithoutErrors = ignoredFiles.filter(ignoredFile => !parsedTscOutput.some(({ path }) => path === ignoredFile))
@@ -57,23 +58,31 @@ export function getTscErrors(parsedTscOutput: Array<TscError>, config?: Typestep
   }
 
   if (ignoredTsErrorCodes.length > 0) {
+    ignoredTsErrorCodesWithoutErrors = ignoredTsErrorCodes.filter(ignoredTsErrorCode => !parsedTscOutput.some(({ tsCode }) => tsCode === ignoredTsErrorCode))
     tscErrors = tscErrors.filter(({ tsCode }) => !ignoredTsErrorCodes.includes(tsCode))
   }
 
   return {
     tscErrors,
     ignoredFilesWithoutErrors: uniqArray(ignoredFilesWithoutErrors),
+    ignoredTsErrorCodesWithoutErrors: uniqArray(ignoredTsErrorCodesWithoutErrors),
   }
 }
 
-export function getOutput({ tscErrors, ignoredFilesWithoutErrors }: ReturnType<typeof getTscErrors>, config?: TypestepConfig) {
+export function getOutput({ tscErrors, ignoredFilesWithoutErrors, ignoredTsErrorCodesWithoutErrors }: ReturnType<typeof getTscErrors>, config?: TypestepConfig) {
   const ignoredFilesHasErrors = ignoredFilesWithoutErrors.length > 0
+  const ignoredTsErrorCodesHasErrors = ignoredTsErrorCodesWithoutErrors.length > 0
   const tscHasErrors = tscErrors.length > 0
-  const outputHasErrors = tscHasErrors || ignoredFilesHasErrors
+  const outputHasErrors = tscHasErrors || ignoredFilesHasErrors || ignoredTsErrorCodesHasErrors
 
   if (ignoredFilesHasErrors) {
     consola.error('The following files were ignored in the config but had no errors in the tsc output:')
     consola.box(ignoredFilesWithoutErrors.join('\n'))
+  }
+
+  if (ignoredTsErrorCodesHasErrors) {
+    consola.error('The following tsc error codes were ignored in the config but had no errors in the tsc output:')
+    consola.box(ignoredTsErrorCodesWithoutErrors.join('\n'))
   }
 
   if (tscHasErrors) {

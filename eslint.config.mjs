@@ -7,10 +7,4 @@ export default antfu(
       '**/fixtures',
     ],
   },
-  {
-    files: ['**/*.test.ts'],
-    rules: {
-      'test/consistent-test-it': ['error', { fn: 'test' }],
-    },
-  },
 )
