@@ -22,6 +22,7 @@ export async function generateInitialConfig({ tscOutputFile, ignoreFiles, ignore
   return { ignoredFiles, ignoredTsErrorCodes }
 }
 
+/* v8 ignore next 11 - ignore coverage for writeFile */
 async function initConfig(configCli: TypestepConfigCli) {
   const config = await generateInitialConfig(configCli)
 
@@ -56,6 +57,7 @@ export default defineCommand({
       description: 'Initialize the Typestep configuration file with all ts error codes from the tsc output marked as ignored',
     },
   },
+  /* v8 ignore next 13 - ignore coverage as it should be run from CLI */
   run({ args }) {
     if (!existsSync(args.tsc_output_file))
       throw new Error('Tsc output file not found')
