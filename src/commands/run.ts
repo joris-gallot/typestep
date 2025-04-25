@@ -12,7 +12,7 @@ import { CONFIG_FILE_NAME } from '../constants.js'
 import { checkConfig, getOutput, getTscErrors, parseTscOutput } from '../index.js'
 import { consola, tryImport } from '../utils.js'
 
-async function readConfigFile() {
+export async function readConfigFile() {
   const configFile = resolve(process.cwd(), CONFIG_FILE_NAME)
 
   if (!existsSync(configFile)) {
@@ -22,12 +22,12 @@ async function readConfigFile() {
 
   const configModule = await tryImport(configFile)
 
-  if (!configModule?.default) {
+  if (!configModule) {
     consola.warn('No default export found in config file')
     return
   }
 
-  return configModule.default as TypestepConfig
+  return configModule as TypestepConfig
 }
 
 async function run(tscOutputFile: string) {

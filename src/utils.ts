@@ -1,14 +1,13 @@
 import type { TscError, TypestepConfig } from './types.js'
 import process from 'node:process'
 import { createConsola } from 'consola'
-import jiti from 'jiti'
+import { createJiti } from 'jiti'
+
+const jiti = createJiti(import.meta.url)
 
 export function tryImport(file: string, rootDir: string = process.cwd()) {
-  // @ts-expect-error "This expression is not callable." but works fine
-  const _import = jiti(rootDir, { interopDefault: true, esmResolve: true })
-
   try {
-    return _import(file)
+    return jiti.import(file, { default: true })
   }
   catch (error: any) {
     if (error.code !== 'MODULE_NOT_FOUND')
