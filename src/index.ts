@@ -47,13 +47,17 @@ export function parseTscOutput(tscOutput: string) {
 }
 
 export function getTscErrors(parsedTscOutput: Array<TscError>, config?: TypestepConfig) {
-  const { ignoredFiles = [] } = config || {}
+  const { ignoredFiles = [], ignoredTsErrorCodes = [] } = config || {}
   let tscErrors = parsedTscOutput
   let ignoredFilesWithoutErrors
 
   if (ignoredFiles.length > 0) {
     ignoredFilesWithoutErrors = ignoredFiles.filter(ignoredFile => !parsedTscOutput.some(({ path }) => path === ignoredFile))
     tscErrors = tscErrors.filter(({ path }) => !ignoredFiles.includes(path))
+  }
+
+  if (ignoredTsErrorCodes.length > 0) {
+    tscErrors = tscErrors.filter(({ tsCode }) => !ignoredTsErrorCodes.includes(tsCode))
   }
 
   return {
@@ -86,11 +90,18 @@ export function getOutput({ tscErrors, ignoredFilesWithoutErrors }: ReturnType<t
 }
 
 export function checkConfig(config: TypestepConfig) {
-  const { ignoredFiles = [] } = config
+  const { ignoredFiles = [], ignoredTsErrorCodes = [] } = config
   const duplicateIgnoredFiles = uniqArray(ignoredFiles.filter((file, index, self) => self.indexOf(file) !== index))
 
   if (duplicateIgnoredFiles.length > 0) {
     consola.warn('The following files were ignored more than once in the `ignoredFiles` config:')
     consola.box(duplicateIgnoredFiles.join('\n'))
+  }
+
+  const duplicateIgnoredTsErrorCodes = uniqArray(ignoredTsErrorCodes.filter((code, index, self) => self.indexOf(code) !== index))
+
+  if (duplicateIgnoredTsErrorCodes.length > 0) {
+    consola.warn('The following tsc error codes were ignored more than once in the `ignoredTsErrorCodes` config:')
+    consola.box(duplicateIgnoredTsErrorCodes.join('\n'))
   }
 }

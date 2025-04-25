@@ -7,5 +7,6 @@ export interface TscError {
 
 export interface TypestepConfig {
   ignoredFiles?: string[]
+  ignoredTsErrorCodes?: string[]
   fullOutput?: boolean
 }
