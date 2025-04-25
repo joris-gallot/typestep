@@ -7,10 +7,10 @@ import { resolve } from 'node:path'
 import process from 'node:process'
 
 import { defineCommand } from 'citty'
-import { consola } from 'consola'
+
 import { CONFIG_FILE_NAME } from '../constants.js'
 import { checkConfig, getOutput, getTscErrors, parseTscOutput } from '../index.js'
-import { tryImport } from '../utils.js'
+import { consola, tryImport } from '../utils.js'
 
 async function readConfigFile() {
   const configFile = resolve(process.cwd(), CONFIG_FILE_NAME)

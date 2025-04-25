@@ -1,6 +1,6 @@
 import type { TscError, TypestepConfig } from './types.js'
-import consola from 'consola'
-import { tscErrorToString, uniqArray } from './utils.js'
+
+import { consola, tscErrorToString, uniqArray } from './utils.js'
 
 export function parseTsError(tscError: string): TscError {
   const regex = /([^()\n]+)\((\d+),(\d+)\):\s+error\s+(TS\d+):\s+(.*)/

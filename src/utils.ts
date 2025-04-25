@@ -1,5 +1,6 @@
 import type { TscError, TypestepConfig } from './types.js'
 import process from 'node:process'
+import { createConsola } from 'consola'
 import jiti from 'jiti'
 
 export function tryImport(file: string, rootDir: string = process.cwd()) {
@@ -30,3 +31,7 @@ export default ${JSON.stringify(config, null, 2)} satisfies TypestepConfig`
 export function uniqArray<T>(array?: Array<T>) {
   return [...new Set(array || [])]
 }
+
+export const consola = createConsola({
+  fancy: true,
+})
