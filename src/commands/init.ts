@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import type { TypestepConfig } from '../types.js'
+import type { TypestepConfig, TypestepConfigCli } from '../types.js'
 import { existsSync } from 'node:fs'
 import { readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
@@ -10,17 +10,20 @@ import { CONFIG_FILE_NAME } from '../constants.js'
 import { parseTscOutput } from '../index.js'
 import { consola, uniqArray, writeTypestepConfig } from '../utils.js'
 
-export async function generateInitialConfig(tscOutputFile: string): Promise<TypestepConfig> {
+export async function generateInitialConfig({ tscOutputFile, ignoreFiles, ignoreTsErrorCodes }: TypestepConfigCli): Promise<TypestepConfig> {
   const tscOutput = await readFile(tscOutputFile, 'utf8')
   const parsedTscOutput = parseTscOutput(tscOutput)
 
-  const ignoredFiles = uniqArray(parsedTscOutput.map(({ path }) => path))
+  const shouldIgnoreFiles = ignoreFiles || (!ignoreFiles && !ignoreTsErrorCodes)
 
-  return { ignoredFiles }
+  const ignoredFiles = shouldIgnoreFiles ? uniqArray(parsedTscOutput.map(({ path }) => path)) : undefined
+  const ignoredTsErrorCodes = ignoreTsErrorCodes ? uniqArray(parsedTscOutput.map(({ tsCode }) => tsCode)) : undefined
+
+  return { ignoredFiles, ignoredTsErrorCodes }
 }
 
-async function initConfig(tscOutputFile: string) {
-  const config = await generateInitialConfig(tscOutputFile)
+async function initConfig(configCli: TypestepConfigCli) {
+  const config = await generateInitialConfig(configCli)
 
   try {
     await writeFile(CONFIG_FILE_NAME, writeTypestepConfig(config))
@@ -42,6 +45,16 @@ export default defineCommand({
       description: 'The tsc output file path to be processed',
       required: true,
     },
+    ignoreFiles: {
+      default: false,
+      type: 'boolean',
+      description: 'Initialize the Typestep configuration file with all files from the tsc output marked as ignored',
+    },
+    ignoreTsErrorCodes: {
+      default: false,
+      type: 'boolean',
+      description: 'Initialize the Typestep configuration file with all ts error codes from the tsc output marked as ignored',
+    },
   },
   run({ args }) {
     if (!existsSync(args.tsc_output_file))
@@ -50,6 +63,10 @@ export default defineCommand({
     if (existsSync(CONFIG_FILE_NAME))
       throw new Error('Typestep config file already exists')
 
-    initConfig(resolve(process.cwd(), args.tsc_output_file))
+    initConfig({
+      tscOutputFile: resolve(process.cwd(), args.tsc_output_file),
+      ignoreFiles: args.ignoreFiles,
+      ignoreTsErrorCodes: args.ignoreTsErrorCodes,
+    })
   },
 })

@@ -10,3 +10,9 @@ export interface TypestepConfig {
   ignoredTsErrorCodes?: string[]
   fullOutput?: boolean
 }
+
+export interface TypestepConfigCli {
+  tscOutputFile: string
+  ignoreFiles?: boolean
+  ignoreTsErrorCodes?: boolean
+}
