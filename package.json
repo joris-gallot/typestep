@@ -24,7 +24,7 @@
     "node": "22.15.0"
   },
   "scripts": {
-    "playground": "jiti src/playground.ts",
+    "playground": "jiti playground.ts",
     "cli": "jiti src/cli.ts",
     "test": "vitest run",
     "test:watch": "vitest",
