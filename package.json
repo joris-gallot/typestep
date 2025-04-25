@@ -11,7 +11,11 @@
     "url": "git+https://github.com/joris-gallot/typestep.git"
   },
   "keywords": [
-    "tsc"
+    "tsc",
+    "typescript",
+    "types",
+    "migration",
+    "incremental-migration"
   ],
   "types": "dist/types.d.ts",
   "bin": {
