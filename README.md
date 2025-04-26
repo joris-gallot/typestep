@@ -18,8 +18,7 @@ tsc --noEmit > tsc-output.log
 
 #### Init config file
 
-> [!NOTE]
-> The init command creates your Typestep config file by analyzing the tsc output, for each file that has TypeScript errors, it will automatically generate a configuration that ignores the specific error codes found in that file. This allows for a granular approach to TypeScript migration, where you can selectively ignore certain types of errors while addressing others.
+The init command creates your Typestep config file by analyzing the tsc output, for each file that has TypeScript errors, it will automatically generate a configuration that ignores the specific error codes found in that file. This allows for a granular approach to TypeScript migration, where you can selectively ignore certain types of errors while addressing others.
 
 ```bash
 typestep init tsc-output.log
