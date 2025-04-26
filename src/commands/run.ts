@@ -31,7 +31,7 @@ export async function readConfigFile() {
 }
 
 /* v8 ignore next 20 - ignore coverage as it should be run from CLI */
-async function run(tscOutputFile: string) {
+export async function run(tscOutputFile: string) {
   const tscOutput = await readFile(tscOutputFile, 'utf8')
   const config = await readConfigFile()
 

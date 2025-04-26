@@ -1,19 +1,8 @@
-/* eslint-disable no-console */
-import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
-import { parseTscOutput } from './src/index.js'
+import { run } from './src/commands/run.js'
 
-async function run() {
-  let tscOutput
-  try {
-    tscOutput = await readFile(resolve(__dirname, 'tsc-output.log'), 'utf8')
-  }
-  catch (error) {
-    throw new Error('Could not read tsc-output.log', { cause: error })
-  }
-
-  const parsedTscOutput = parseTscOutput(tscOutput)
-  console.log(parsedTscOutput)
+async function start() {
+  run(resolve(__dirname, 'tsc-output.log'))
 }
 
-run()
+start()
