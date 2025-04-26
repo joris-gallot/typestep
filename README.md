@@ -19,17 +19,10 @@ tsc > tsc-output.log
 #### Init config file
 
 > [!NOTE]
-> Init command will create your Typestep config file. By default, it will mark all files from the tsc output as ignored, you can also choose to ignore specific TypeScript error codes.
+> The init command creates your Typestep config file by analyzing the tsc output, for each file that has TypeScript errors, it will automatically generate a configuration that ignores the specific error codes found in that file. This allows for a granular approach to TypeScript migration, where you can selectively ignore certain types of errors while addressing others.
 
 ```bash
-# Initialize with all files ignored
 typestep init tsc-output.log
-
-# Initialize with all TypeScript error codes ignored
-typestep init tsc-output.log --ignoreTsErrorCodes
-
-# Initialize with both files and TypeScript error codes ignored
-typestep init tsc-output.log --ignoreFiles --ignoreTsErrorCodes
 ```
 
 #### Or create your config file
@@ -39,8 +32,13 @@ typestep init tsc-output.log --ignoreFiles --ignoreTsErrorCodes
 import type { TypestepConfig } from 'typestep'
 
 export default {
-  ignoredFiles: ['src/main.ts'], // files to ignore
-  ignoredTsErrorCodes: [ // ts error codes to ignore
+  ignoredFiles: {
+    'src/foo.ts': true, // ignore all errors
+    'src/bar.ts': {
+      ignoredTsErrorCodes: ['TS2339', 'TS2345'] // ignore only ts error codes
+    }
+  },
+  ignoredTsErrorCodes: [ // global ts error codes to ignore
     'TS2322'
   ],
   fullOutputErrors: false, // get full output errors (default: false)
