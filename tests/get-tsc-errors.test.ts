@@ -116,6 +116,114 @@ describe('ignored files and codes', () => {
 
     expect(ignoredTsErrorCodesWithoutErrors).toStrictEqual(['TS9999'])
   })
+
+  it('file with ignored error codes that exist in output', async () => {
+    const { ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': {
+          ignoredTsErrorCodes: ['TS2339', 'TS2571'],
+        },
+      },
+    })
+
+    expect(ignoredFilesWithoutErrors).toStrictEqual([])
+  })
+
+  it('file with ignored error codes that do not exist in output', async () => {
+    const { ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': {
+          ignoredTsErrorCodes: ['TS9999', 'TS8888'],
+        },
+      },
+    })
+
+    expect(ignoredFilesWithoutErrors).toStrictEqual([
+      {
+        file: 'src/App.vue',
+        missingCodes: ['TS9999', 'TS8888'],
+        type: 'codes',
+      },
+    ])
+  })
+
+  it('file with mixed existing and non-existing ignored error codes', async () => {
+    const { ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': {
+          ignoredTsErrorCodes: ['TS2339', 'TS9999'],
+        },
+      },
+    })
+
+    expect(ignoredFilesWithoutErrors).toStrictEqual([
+      {
+        file: 'src/App.vue',
+        missingCodes: ['TS9999'],
+        type: 'codes',
+      },
+    ])
+  })
+
+  it('multiple files with different ignored error code configurations', async () => {
+    const { ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': {
+          ignoredTsErrorCodes: ['TS2339', 'TS9999'],
+        },
+        'src/components/Button.test.tsx': {
+          ignoredTsErrorCodes: ['TS2464', 'TS8888'],
+        },
+        'non-existent-file.ts': {
+          ignoredTsErrorCodes: ['TS1234'],
+        },
+      },
+    })
+
+    expect(ignoredFilesWithoutErrors).toStrictEqual([
+      {
+        file: 'src/App.vue',
+        missingCodes: ['TS9999'],
+        type: 'codes',
+      },
+      {
+        file: 'src/components/Button.test.tsx',
+        missingCodes: ['TS8888'],
+        type: 'codes',
+      },
+      {
+        file: 'non-existent-file.ts',
+        missingCodes: ['TS1234'],
+        type: 'codes',
+      },
+    ])
+  })
+
+  it('mix of file-specific and global ignored error codes', async () => {
+    const { ignoredFilesWithoutErrors, ignoredTsErrorCodesWithoutErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': {
+          ignoredTsErrorCodes: ['TS2339', 'TS9999'],
+        },
+        'non-existent-file.ts': true,
+      },
+      ignoredTsErrorCodes: ['TS2464', 'TS8888'],
+    })
+
+    expect(ignoredFilesWithoutErrors).toStrictEqual([
+      {
+        file: 'src/App.vue',
+        missingCodes: ['TS9999'],
+        type: 'codes',
+      },
+      {
+        file: 'non-existent-file.ts',
+        missingCodes: [],
+        type: 'all',
+      },
+    ])
+    expect(ignoredTsErrorCodesWithoutErrors).toStrictEqual(['TS8888'])
+  })
 })
 
 describe('tsc errors', () => {
