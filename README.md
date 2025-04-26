@@ -11,7 +11,7 @@ npm install typestep --save-dev
 > [!WARNING]
 > Do Not Use `--pretty` option with `tsc`
 ```bash
-tsc > tsc-output.log
+tsc --noEmit > tsc-output.log
 ```
 
 ### Config file
@@ -46,6 +46,10 @@ export default {
 ```
 
 ### Run typestep
+
+The `typestep run` command analyzes the tsc output file and compares it with your Typestep configuration. It shows you:
+- TypeScript errors that need to be fixed in non-ignored files
+- Files and error codes that can be removed from the configuration as their corresponding errors no longer exist
 
 ```bash
 typestep run tsc-output.log
