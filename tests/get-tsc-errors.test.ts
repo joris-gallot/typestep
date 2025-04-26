@@ -10,7 +10,6 @@ const parsedTscOutput = parseTscOutput(tscOutput)
 describe('ignored files and codes', () => {
   it('no ignored files or codes', async () => {
     const { ignoredFilesWithoutErrors, ignoredTsErrorCodesWithoutErrors } = getTscErrors(parsedTscOutput, {
-      ignoredFiles: [],
       ignoredTsErrorCodes: [],
     })
 
@@ -20,7 +19,9 @@ describe('ignored files and codes', () => {
 
   it('ignored file exists in output', async () => {
     const { ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, {
-      ignoredFiles: ['src/App.vue'], // Exists in output
+      ignoredFiles: {
+        'src/App.vue': true,
+      },
     })
 
     expect(ignoredFilesWithoutErrors).toStrictEqual([])
@@ -28,7 +29,9 @@ describe('ignored files and codes', () => {
 
   it('ignored file does not exist in output', async () => {
     const { ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, {
-      ignoredFiles: ['non-existent-file.ts'], // Does not exist in output
+      ignoredFiles: {
+        'non-existent-file.ts': true,
+      },
     })
 
     expect(ignoredFilesWithoutErrors).toStrictEqual(['non-existent-file.ts'])
@@ -36,7 +39,11 @@ describe('ignored files and codes', () => {
 
   it('multiple ignored files, some exist, some do not', async () => {
     const { ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, {
-      ignoredFiles: ['src/App.vue', 'non-existent-file.ts', 'another-non-existent-file.ts'],
+      ignoredFiles: {
+        'src/App.vue': true,
+        'non-existent-file.ts': true,
+        'another-non-existent-file.ts': true,
+      },
     })
 
     expect(ignoredFilesWithoutErrors).toStrictEqual(['non-existent-file.ts', 'another-non-existent-file.ts'])
@@ -68,20 +75,15 @@ describe('ignored files and codes', () => {
 
   it('mix of ignored files and codes, some exist, some do not', async () => {
     const { ignoredFilesWithoutErrors, ignoredTsErrorCodesWithoutErrors } = getTscErrors(parsedTscOutput, {
-      ignoredFiles: ['src/App.vue', 'non-existent-file.ts'],
+      ignoredFiles: {
+        'src/App.vue': true,
+        'non-existent-file.ts': true,
+      },
       ignoredTsErrorCodes: ['TS2322', 'TS9999'],
     })
 
     expect(ignoredFilesWithoutErrors).toStrictEqual(['non-existent-file.ts'])
     expect(ignoredTsErrorCodesWithoutErrors).toStrictEqual(['TS9999'])
-  })
-
-  it('duplicate non-existent ignored files', async () => {
-    const { ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, {
-      ignoredFiles: ['non-existent-file.ts', 'non-existent-file.ts'],
-    })
-
-    expect(ignoredFilesWithoutErrors).toStrictEqual(['non-existent-file.ts'])
   })
 
   it('duplicate non-existent ignored error codes', async () => {

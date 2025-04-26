@@ -1,4 +1,4 @@
-import type { TscError, TypestepConfig } from './types.js'
+import type { ConfigIgnoredFilesOptions, TscError, TypestepConfig } from './types.js'
 
 import { consola, tscErrorToString, uniqArray } from './utils.js'
 
@@ -46,15 +46,40 @@ export function parseTscOutput(tscOutput: string) {
   return finalErrors
 }
 
+export function shouldIgnoreFile({
+  file,
+  ignoredFile,
+  ignoredFileOptions,
+  tsCode,
+}: {
+  file: string
+  ignoredFile: string
+  ignoredFileOptions: ConfigIgnoredFilesOptions
+  tsCode: string
+}): boolean {
+  if (file !== ignoredFile)
+    return false
+
+  if (ignoredFileOptions === true)
+    return true
+
+  return ignoredFileOptions.ignoredTsErrorCodes.includes(tsCode)
+}
+
 export function getTscErrors(parsedTscOutput: Array<TscError>, config?: TypestepConfig) {
-  const { ignoredFiles = [], ignoredTsErrorCodes = [] } = config || {}
+  const { ignoredFiles = {}, ignoredTsErrorCodes = [] } = config || {}
   let tscErrors = parsedTscOutput
   let ignoredFilesWithoutErrors
   let ignoredTsErrorCodesWithoutErrors
 
-  if (ignoredFiles.length > 0) {
-    ignoredFilesWithoutErrors = ignoredFiles.filter(ignoredFile => !parsedTscOutput.some(({ path }) => path === ignoredFile))
-    tscErrors = tscErrors.filter(({ path }) => !ignoredFiles.includes(path))
+  if (Object.keys(ignoredFiles).length > 0) {
+    ignoredFilesWithoutErrors = Object.keys(ignoredFiles).filter(ignoredFile => !parsedTscOutput.some(({ path, tsCode }) => {
+      return shouldIgnoreFile({ file: path, ignoredFile, ignoredFileOptions: ignoredFiles[ignoredFile], tsCode })
+    }))
+
+    tscErrors = tscErrors.filter(({ path, tsCode }) => !Object.keys(ignoredFiles).some((ignoredFile) => {
+      return shouldIgnoreFile({ file: path, ignoredFile, ignoredFileOptions: ignoredFiles[ignoredFile], tsCode })
+    }))
   }
 
   if (ignoredTsErrorCodes.length > 0) {
@@ -99,13 +124,7 @@ export function getOutput({ tscErrors, ignoredFilesWithoutErrors, ignoredTsError
 }
 
 export function checkConfig(config: TypestepConfig) {
-  const { ignoredFiles = [], ignoredTsErrorCodes = [] } = config
-  const duplicateIgnoredFiles = uniqArray(ignoredFiles.filter((file, index, self) => self.indexOf(file) !== index))
-
-  if (duplicateIgnoredFiles.length > 0) {
-    consola.warn('The following files were ignored more than once in the `ignoredFiles` config:')
-    consola.box(duplicateIgnoredFiles.join('\n'))
-  }
+  const { ignoredTsErrorCodes = [] } = config
 
   const duplicateIgnoredTsErrorCodes = uniqArray(ignoredTsErrorCodes.filter((code, index, self) => self.indexOf(code) !== index))
 

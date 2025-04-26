@@ -51,11 +51,61 @@ describe('ignored ts error codes', () => {
   it('with ignored error codes and ignored files', async () => {
     const { tscErrors } = getTscErrors(parsedTscOutput, {
       ignoredTsErrorCodes: ['TS2322'], // Ignore TS2322 (24 occurrences)
-      ignoredFiles: ['src/App.vue'], // Ignore src/App.vue (15 errors, 1 of which is TS2322)
+      ignoredFiles: {
+        'src/App.vue': true, // Ignore src/App.vue (15 errors, 1 of which is TS2322)
+      },
     })
 
     // if code error is in ignored file, it should be ignored
     // 138 total - 15 (App.vue) - 24 (other TS2322) + 1 (TS2322 in App.vue) = 100
     assert.lengthOf(tscErrors, 100)
+  })
+
+  it('with specific error codes ignored for specific files', async () => {
+    const { tscErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': {
+          ignoredTsErrorCodes: ['TS2322', 'TS2345'], // Only ignore TS2322 and TS2345 in App.vue
+        },
+      },
+    })
+
+    // App.vue has 12 errors total, but we only ignore TS2322 (1 error)
+    // 138 total - 1 (ignored error in App.vue) = 137
+    assert.lengthOf(tscErrors, 137)
+  })
+
+  it('with multiple files having different ignored error codes', async () => {
+    const { tscErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': {
+          ignoredTsErrorCodes: ['TS2322', 'TS2345'],
+        },
+        'src/components/Comp1.vue': {
+          ignoredTsErrorCodes: ['TS7006'],
+        },
+      },
+    })
+
+    // App.vue: ignore 1 error (TS2322)
+    // Comp1.vue: ignore 4 TS7006 errors
+    // 138 total - 1 - 4 = 134
+    assert.lengthOf(tscErrors, 134)
+  })
+
+  it('with mixed file ignore configurations', async () => {
+    const { tscErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': true, // Ignore all errors in App.vue (12 errors)
+        'src/components/Comp1.vue': {
+          ignoredTsErrorCodes: ['TS7006'], // Only ignore TS7006 in Comp1.vue (4 errors)
+        },
+      },
+    })
+
+    // App.vue: ignore all 12 errors
+    // Comp1.vue: ignore 4 TS7006 errors
+    // 138 total - 12 - 4 = 120
+    assert.lengthOf(tscErrors, 120)
   })
 })

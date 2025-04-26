@@ -5,9 +5,13 @@ export interface TscError {
   error: string
 }
 
+export type ConfigIgnoredFilesOptions = true | {
+  ignoredTsErrorCodes: Array<string>
+}
+
 export interface TypestepConfig {
-  ignoredFiles?: string[]
-  ignoredTsErrorCodes?: string[]
+  ignoredFiles?: Record<string, ConfigIgnoredFilesOptions>
+  ignoredTsErrorCodes?: Array<string>
   fullOutput?: boolean
 }
 

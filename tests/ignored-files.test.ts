@@ -10,7 +10,7 @@ const parsedTscOutput = parseTscOutput(tscOutput)
 describe('ignored files', () => {
   it('without ignored files', async () => {
     const { tscErrors } = getTscErrors(parsedTscOutput, {
-      ignoredFiles: [],
+      ignoredFiles: undefined,
     })
 
     assert.lengthOf(tscErrors, 138)
@@ -18,7 +18,9 @@ describe('ignored files', () => {
 
   it('with one ignored files', async () => {
     const { tscErrors } = getTscErrors(parsedTscOutput, {
-      ignoredFiles: ['src/App.vue'],
+      ignoredFiles: {
+        'src/App.vue': true,
+      },
     })
 
     assert.lengthOf(tscErrors, 123)
@@ -26,7 +28,11 @@ describe('ignored files', () => {
 
   it('with multiple ignored files', async () => {
     const { tscErrors } = getTscErrors(parsedTscOutput, {
-      ignoredFiles: ['src/App.vue', 'src/components/Comp1.vue', 'src/components/Comp2.vue'],
+      ignoredFiles: {
+        'src/App.vue': true,
+        'src/components/Comp1.vue': true,
+        'src/components/Comp2.vue': true,
+      },
     })
 
     assert.lengthOf(tscErrors, 113)
