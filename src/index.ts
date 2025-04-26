@@ -54,7 +54,7 @@ export function shouldIgnoreFile({
 }: {
   file: string
   ignoredFile: string
-  ignoredFileOptions: ConfigIgnoredFilesOptions
+  ignoredFileOptions: NonNullable<TypestepConfig['ignoredFiles']>[string]
   tsCode: string
 }): boolean {
   if (file !== ignoredFile)
