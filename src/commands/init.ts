@@ -26,7 +26,7 @@ export async function generateInitialConfig(tscOutputFile: string): Promise<Type
 }
 
 /* v8 ignore next 11 - ignore coverage for writeFile */
-async function initConfig(tscOutputFile: string) {
+export async function initConfig(tscOutputFile: string) {
   const config = await generateInitialConfig(tscOutputFile)
 
   try {
