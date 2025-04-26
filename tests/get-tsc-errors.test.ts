@@ -34,7 +34,13 @@ describe('ignored files and codes', () => {
       },
     })
 
-    expect(ignoredFilesWithoutErrors).toStrictEqual(['non-existent-file.ts'])
+    expect(ignoredFilesWithoutErrors).toStrictEqual([
+      {
+        file: 'non-existent-file.ts',
+        missingCodes: [],
+        type: 'all',
+      },
+    ])
   })
 
   it('multiple ignored files, some exist, some do not', async () => {
@@ -46,7 +52,18 @@ describe('ignored files and codes', () => {
       },
     })
 
-    expect(ignoredFilesWithoutErrors).toStrictEqual(['non-existent-file.ts', 'another-non-existent-file.ts'])
+    expect(ignoredFilesWithoutErrors).toStrictEqual([
+      {
+        file: 'non-existent-file.ts',
+        missingCodes: [],
+        type: 'all',
+      },
+      {
+        file: 'another-non-existent-file.ts',
+        missingCodes: [],
+        type: 'all',
+      },
+    ])
   })
 
   it('ignored TS error code exists in output', async () => {
@@ -82,7 +99,13 @@ describe('ignored files and codes', () => {
       ignoredTsErrorCodes: ['TS2322', 'TS9999'],
     })
 
-    expect(ignoredFilesWithoutErrors).toStrictEqual(['non-existent-file.ts'])
+    expect(ignoredFilesWithoutErrors).toStrictEqual([
+      {
+        file: 'non-existent-file.ts',
+        missingCodes: [],
+        type: 'all',
+      },
+    ])
     expect(ignoredTsErrorCodesWithoutErrors).toStrictEqual(['TS9999'])
   })
 

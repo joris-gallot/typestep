@@ -108,8 +108,8 @@ describe('getOutput', () => {
     expect(consola.log).not.toHaveBeenCalled()
   })
 
-  it('should return true and log only ignored files when only ignoredFilesWithoutErrors exist', () => {
-    const ignoredFiles = ['non-existent-file.ts']
+  it('should return true and log only ignored files when only ignoredFilesWithoutErrors exist with type all', () => {
+    const ignoredFiles = [{ file: 'non-existent-file.ts', type: 'all' as const }]
     const result = getOutput({
       tscErrors: [],
       ignoredFilesWithoutErrors: ignoredFiles,
@@ -120,12 +120,32 @@ describe('getOutput', () => {
     expect(consola.error).toHaveBeenCalledTimes(1)
     expect(consola.error).toHaveBeenCalledWith('The following files were ignored in the config but had no errors in the tsc output:')
     expect(consola.box).toHaveBeenCalledTimes(1)
-    expect(consola.box).toHaveBeenCalledWith(ignoredFiles.join('\n'))
+    expect(consola.box).toHaveBeenCalledWith('non-existent-file.ts (no errors found)')
+    expect(consola.log).not.toHaveBeenCalled()
+  })
+
+  it('should return true and log only ignored files when only ignoredFilesWithoutErrors exist with type codes', () => {
+    const ignoredFiles = [{
+      file: 'non-existent-file.ts',
+      type: 'codes' as const,
+      missingCodes: ['TS1234', 'TS5678'],
+    }]
+    const result = getOutput({
+      tscErrors: [],
+      ignoredFilesWithoutErrors: ignoredFiles,
+      ignoredTsErrorCodesWithoutErrors: [],
+    })
+
+    expect(result).toBe(true)
+    expect(consola.error).toHaveBeenCalledTimes(1)
+    expect(consola.error).toHaveBeenCalledWith('The following files were ignored in the config but had no errors in the tsc output:')
+    expect(consola.box).toHaveBeenCalledTimes(1)
+    expect(consola.box).toHaveBeenCalledWith('non-existent-file.ts (no errors for codes: TS1234, TS5678)')
     expect(consola.log).not.toHaveBeenCalled()
   })
 
   it('should return true and log ignored files and tsc errors', () => {
-    const ignoredFiles = ['non-existent-file.ts']
+    const ignoredFiles = [{ file: 'non-existent-file.ts', type: 'all' as const }]
     const tscErrors = [mockTscError]
     const result = getOutput({
       tscErrors,
@@ -138,13 +158,13 @@ describe('getOutput', () => {
     expect(consola.error).toHaveBeenCalledWith('The following files were ignored in the config but had no errors in the tsc output:')
     expect(consola.error).toHaveBeenCalledWith(`Found ${tscErrors.length} tsc errors in 1 files:`)
     expect(consola.box).toHaveBeenCalledTimes(2)
-    expect(consola.box).toHaveBeenCalledWith(ignoredFiles.join('\n'))
+    expect(consola.box).toHaveBeenCalledWith('non-existent-file.ts (no errors found)')
     expect(consola.box).toHaveBeenCalledWith('src/file1.ts')
     expect(consola.log).not.toHaveBeenCalled()
   })
 
   it('should return true and log ignored files and ignored error codes', () => {
-    const ignoredFiles = ['non-existent-file.ts']
+    const ignoredFiles = [{ file: 'non-existent-file.ts', type: 'all' as const }]
     const ignoredCodes = ['TS9999']
     const result = getOutput({
       tscErrors: [],
@@ -157,13 +177,13 @@ describe('getOutput', () => {
     expect(consola.error).toHaveBeenCalledWith('The following files were ignored in the config but had no errors in the tsc output:')
     expect(consola.error).toHaveBeenCalledWith('The following tsc error codes were ignored in the config but had no errors in the tsc output:')
     expect(consola.box).toHaveBeenCalledTimes(2)
-    expect(consola.box).toHaveBeenCalledWith(ignoredFiles.join('\n'))
+    expect(consola.box).toHaveBeenCalledWith('non-existent-file.ts (no errors found)')
     expect(consola.box).toHaveBeenCalledWith(ignoredCodes.join('\n'))
     expect(consola.log).not.toHaveBeenCalled()
   })
 
   it('should return true and log all three types of errors', () => {
-    const ignoredFiles = ['non-existent-file.ts']
+    const ignoredFiles = [{ file: 'non-existent-file.ts', type: 'all' as const }]
     const ignoredCodes = ['TS9999']
     const tscErrors = [mockTscError]
     const result = getOutput({
@@ -178,7 +198,7 @@ describe('getOutput', () => {
     expect(consola.error).toHaveBeenCalledWith('The following tsc error codes were ignored in the config but had no errors in the tsc output:')
     expect(consola.error).toHaveBeenCalledWith(`Found ${tscErrors.length} tsc errors in 1 files:`)
     expect(consola.box).toHaveBeenCalledTimes(3)
-    expect(consola.box).toHaveBeenCalledWith(ignoredFiles.join('\n'))
+    expect(consola.box).toHaveBeenCalledWith('non-existent-file.ts (no errors found)')
     expect(consola.box).toHaveBeenCalledWith(ignoredCodes.join('\n'))
     expect(consola.box).toHaveBeenCalledWith('src/file1.ts')
     expect(consola.log).not.toHaveBeenCalled()

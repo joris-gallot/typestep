@@ -69,13 +69,38 @@ export function shouldIgnoreFile({
 export function getTscErrors(parsedTscOutput: Array<TscError>, config?: TypestepConfig) {
   const { ignoredFiles = {}, ignoredTsErrorCodes = [] } = config || {}
   let tscErrors = parsedTscOutput
-  let ignoredFilesWithoutErrors
+  let ignoredFilesWithoutErrors: Array<{
+    file: string
+    type: 'all' | 'codes'
+    missingCodes?: string[]
+  }> = []
   let ignoredTsErrorCodesWithoutErrors
 
   if (Object.keys(ignoredFiles).length > 0) {
-    ignoredFilesWithoutErrors = Object.keys(ignoredFiles).filter(ignoredFile => !parsedTscOutput.some(({ path, tsCode }) => {
-      return shouldIgnoreFile({ file: path, ignoredFile, ignoredFileOptions: ignoredFiles[ignoredFile], tsCode })
-    }))
+    ignoredFilesWithoutErrors = Object.keys(ignoredFiles).map((ignoredFile) => {
+      const fileErrors = parsedTscOutput.filter(({ path }) => path === ignoredFile)
+      const fileConfig = ignoredFiles[ignoredFile]
+
+      if (fileConfig === true) {
+        // File is completely ignored
+        return {
+          file: ignoredFile,
+          type: 'all' as const,
+          missingCodes: fileErrors.length === 0 ? [] : undefined,
+        }
+      }
+      else {
+        // File has specific error codes ignored
+        const missingCodes = fileConfig.ignoredTsErrorCodes.filter(code =>
+          !fileErrors.some(error => error.tsCode === code),
+        )
+        return {
+          file: ignoredFile,
+          type: 'codes' as const,
+          missingCodes: missingCodes.length > 0 ? missingCodes : undefined,
+        }
+      }
+    }).filter(result => result.missingCodes !== undefined)
 
     tscErrors = tscErrors.filter(({ path, tsCode }) => !Object.keys(ignoredFiles).some((ignoredFile) => {
       return shouldIgnoreFile({ file: path, ignoredFile, ignoredFileOptions: ignoredFiles[ignoredFile], tsCode })
@@ -89,7 +114,7 @@ export function getTscErrors(parsedTscOutput: Array<TscError>, config?: Typestep
 
   return {
     tscErrors,
-    ignoredFilesWithoutErrors: uniqArray(ignoredFilesWithoutErrors),
+    ignoredFilesWithoutErrors,
     ignoredTsErrorCodesWithoutErrors: uniqArray(ignoredTsErrorCodesWithoutErrors),
   }
 }
@@ -102,7 +127,15 @@ export function getOutput({ tscErrors, ignoredFilesWithoutErrors, ignoredTsError
 
   if (ignoredFilesHasErrors) {
     consola.error('The following files were ignored in the config but had no errors in the tsc output:')
-    consola.box(ignoredFilesWithoutErrors.join('\n'))
+    const output = ignoredFilesWithoutErrors.map(({ file, type, missingCodes }) => {
+      if (type === 'all') {
+        return `${file} (no errors found)`
+      }
+
+      return `${file} (no errors for codes: ${missingCodes?.join(', ')})`
+    })
+
+    consola.box(output.join('\n'))
   }
 
   if (ignoredTsErrorCodesHasErrors) {
