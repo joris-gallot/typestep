@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import type { TypestepConfig } from '../types.js'
+import type { NonEmptyArray, TypestepConfig } from '../types.js'
 import { existsSync } from 'node:fs'
 import { readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
@@ -15,7 +15,7 @@ export async function generateInitialConfig(tscOutputFile: string): Promise<Type
   const parsedTscOutput = parseTscOutput(tscOutput)
 
   const ignoredFiles = Object.fromEntries(parsedTscOutput.map(({ path }) => {
-    const ignoredTsErrorCodes = uniqArray(parsedTscOutput.filter(({ path: p }) => p === path).map(({ tsCode }) => tsCode))
+    const ignoredTsErrorCodes = uniqArray(parsedTscOutput.filter(({ path: p }) => p === path).map(({ tsCode }) => tsCode)) as NonEmptyArray<string>
 
     return [path, {
       ignoredTsErrorCodes,

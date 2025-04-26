@@ -5,8 +5,10 @@ export interface TscError {
   error: string
 }
 
+export type NonEmptyArray<T> = [T, ...T[]]
+
 interface ConfigIgnoredFilesOptions {
-  ignoredTsErrorCodes: Array<string>
+  ignoredTsErrorCodes: NonEmptyArray<string>
 }
 
 export interface TypestepConfig {

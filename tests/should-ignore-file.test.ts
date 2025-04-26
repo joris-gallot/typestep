@@ -55,7 +55,7 @@ describe('shouldIgnoreFile', () => {
       file: 'src/file1.ts',
       ignoredFile: 'src/file1.ts',
       ignoredFileOptions: {
-        ignoredTsErrorCodes: [],
+        ignoredTsErrorCodes: ['TS54321', 'TS5678'],
       },
       tsCode: 'TS1234',
     })
@@ -68,7 +68,7 @@ describe('shouldIgnoreFile', () => {
       file: 'src/file1.ts',
       ignoredFile: 'src/file1.ts',
       ignoredFileOptions: {
-        ignoredTsErrorCodes: [],
+        ignoredTsErrorCodes: ['TS4321', 'TS5678'],
       },
       tsCode: 'TS1234',
     })

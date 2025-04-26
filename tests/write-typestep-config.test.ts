@@ -172,28 +172,4 @@ export default {
 
     expect(writeTypestepConfig(config)).toBe(expected)
   })
-
-  it('should generate config with empty ts error codes array for ignored files', () => {
-    const config: TypestepConfig = {
-      ignoredFiles: {
-        'src/file1.ts': {
-          ignoredTsErrorCodes: [],
-        },
-        'src/file2.ts': true,
-      },
-    }
-
-    const expected = `import type { TypestepConfig } from 'typestep'
-  
-export default {
-  "ignoredFiles": {
-    "src/file1.ts": {
-      "ignoredTsErrorCodes": []
-    },
-    "src/file2.ts": true
-  }
-} satisfies TypestepConfig`
-
-    expect(writeTypestepConfig(config)).toBe(expected)
-  })
 })
