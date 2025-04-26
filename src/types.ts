@@ -5,7 +5,7 @@ export interface TscError {
   error: string
 }
 
-export interface ConfigIgnoredFilesOptions {
+interface ConfigIgnoredFilesOptions {
   ignoredTsErrorCodes: Array<string>
 }
 

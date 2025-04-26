@@ -68,7 +68,7 @@ describe('ignored files and codes', () => {
 
   it('ignored TS error code exists in output', async () => {
     const { ignoredTsErrorCodesWithoutErrors } = getTscErrors(parsedTscOutput, {
-      ignoredTsErrorCodes: ['TS2322'], // Exists in output
+      ignoredTsErrorCodes: ['TS2339'], // Exists in output
     })
 
     expect(ignoredTsErrorCodesWithoutErrors).toStrictEqual([])
@@ -84,7 +84,7 @@ describe('ignored files and codes', () => {
 
   it('multiple ignored TS error codes, some exist, some do not', async () => {
     const { ignoredTsErrorCodesWithoutErrors } = getTscErrors(parsedTscOutput, {
-      ignoredTsErrorCodes: ['TS2322', 'TS9999', 'TS8888'],
+      ignoredTsErrorCodes: ['TS2339', 'TS9999', 'TS8888'],
     })
 
     expect(ignoredTsErrorCodesWithoutErrors).toStrictEqual(['TS9999', 'TS8888'])
@@ -96,7 +96,7 @@ describe('ignored files and codes', () => {
         'src/App.vue': true,
         'non-existent-file.ts': true,
       },
-      ignoredTsErrorCodes: ['TS2322', 'TS9999'],
+      ignoredTsErrorCodes: ['TS2339', 'TS9999'],
     })
 
     expect(ignoredFilesWithoutErrors).toStrictEqual([
@@ -122,7 +122,7 @@ describe('tsc errors', () => {
   it('with 1 extra line', async () => {
     const { tscErrors } = getTscErrors(parsedTscOutput)
 
-    const { error } = tscErrors[0]
+    const { error } = tscErrors[12]
 
     assert.lengthOf(error.split('\n'), 2)
     assert.equal(error, `Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
@@ -132,7 +132,7 @@ describe('tsc errors', () => {
   it('with 4 extra lines', async () => {
     const { tscErrors } = getTscErrors(parsedTscOutput)
 
-    const { error } = tscErrors[3]
+    const { error } = tscErrors[20]
 
     assert.lengthOf(error.split('\n'), 5)
     assert.equal(error, `No overload matches this call.
@@ -145,7 +145,7 @@ describe('tsc errors', () => {
   it('with 8 extra lines', async () => {
     const { tscErrors } = getTscErrors(parsedTscOutput)
 
-    const { error } = tscErrors[40]
+    const { error } = tscErrors[39]
 
     assert.lengthOf(error.split('\n'), 9)
     assert.equal(error, `No overload matches this call.

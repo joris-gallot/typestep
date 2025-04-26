@@ -13,7 +13,7 @@ describe('ignored files', () => {
       ignoredFiles: undefined,
     })
 
-    assert.lengthOf(tscErrors, 138)
+    assert.lengthOf(tscErrors, 40)
   })
 
   it('with one ignored files', async () => {
@@ -23,18 +23,19 @@ describe('ignored files', () => {
       },
     })
 
-    assert.lengthOf(tscErrors, 123)
+    assert.lengthOf(tscErrors, 36)
   })
 
   it('with multiple ignored files', async () => {
     const { tscErrors } = getTscErrors(parsedTscOutput, {
       ignoredFiles: {
         'src/App.vue': true,
-        'src/components/Comp1.vue': true,
-        'src/components/Comp2.vue': true,
+        'src/components/Button.test.tsx': true,
+        'src/utils.ts': true,
+        'src/invalid.ts': true,
       },
     })
 
-    assert.lengthOf(tscErrors, 113)
+    assert.lengthOf(tscErrors, 22)
   })
 })

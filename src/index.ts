@@ -1,4 +1,4 @@
-import type { ConfigIgnoredFilesOptions, TscError, TypestepConfig } from './types.js'
+import type { TscError, TypestepConfig } from './types.js'
 
 import { consola, tscErrorToString, uniqArray } from './utils.js'
 

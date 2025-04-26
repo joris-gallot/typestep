@@ -1,51 +1,50 @@
-node_modules/.pnpm/@splidejs+vue-splide@0.6.12/node_modules/@splidejs/vue-splide/src/js/plugin/plugin.ts(7,20): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+src/main.ts(12,15): error TS2339: Property 'config' does not exist on type 'App'.
+src/main.ts(25,8): error TS2740: Type '{ name: string; }' is missing the following properties from type 'User': id, email, role.
+src/main.ts(42,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+src/App.vue(15,23): error TS2339: Property 'store' does not exist on type 'ComponentPublicInstance'.
+src/App.vue(28,16): error TS2571: Object is of type 'unknown'.
+src/App.vue(35,12): error TS2339: Property 'router' does not exist on type 'ComponentPublicInstance'.
+src/App.vue(42,8): error TS2769: No overload matches this call.
+src/components/Button.test.tsx(5,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+src/components/Button.test.tsx(12,23): error TS2339: Property 'click' does not exist on type 'VueNode<Element>'.
+src/components/Button.test.tsx(18,16): error TS2571: Object is of type 'unknown'.
+src/components/Button.test.tsx(25,12): error TS2339: Property 'dataset' does not exist on type 'VueNode<Element>'.
+src/components/Button.test.tsx(32,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+src/components/Button.test.tsx(39,23): error TS2339: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
   Type 'undefined' is not assignable to type 'string'.
-node_modules/.pnpm/@splidejs+vue-splide@0.6.12/node_modules/@splidejs/vue-splide/src/js/plugin/plugin.ts(8,20): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
-  Type 'undefined' is not assignable to type 'string'.
-src/App.vue(153,11): error TS2322: Type 'Timeout' is not assignable to type 'null'.
-src/App.vue(155,25): error TS2769: No overload matches this call.
+src/invalid.ts: error TS2339: Property 'filter' does not exist on type 'string | VNodeArrayChildren | RawSlots'.
+src/invalid.ts(29,23): TS2339: Property 'filter' does not exist on type 'string | VNodeArrayChildren | RawSlots'.
+src/utils.ts(8,15): error TS2339: Property 'map' does not exist on type 'string'.
+src/utils.ts(15,8): error TS2740: Type '{ value: number; }' is missing the following properties from type 'Config': name, version.
+src/utils.ts(22,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+src/utils.ts(29,23): error TS2339: Property 'filter' does not exist on type 'string | VNodeArrayChildren | RawSlots'.
+src/utils.ts(36,16): error TS2571: Object is of type 'unknown'.
+src/utils.ts(43,12): error TS2339: Property 'dataset' does not exist on type 'VueNode<Element>'.
+src/utils.ts(50,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+src/utils.ts(57,23): error TS2339: No overload matches this call.
   Overload 1 of 2, '(intervalId: string | number | Timeout | undefined): void', gave the following error.
     Argument of type 'null' is not assignable to parameter of type 'string | number | Timeout | undefined'.
   Overload 2 of 2, '(id: number | undefined): void', gave the following error.
     Argument of type 'null' is not assignable to parameter of type 'number | undefined'.
-src/App.vue(203,17): error TS7006: Parameter 'e' implicitly has an 'any' type.
-src/App.vue(210,44): error TS2339: Property 'STONLY_WID' does not exist on type 'Window & typeof globalThis'.
-src/App.vue(217,47): error TS7006: Parameter 'o' implicitly has an 'any' type.
-src/App.vue(222,16): error TS2339: Property 'queue' does not exist on type '() => void'.
-src/App.vue(237,7): error TS2554: Expected 8 arguments, but got 4.
-src/App.vue(240,41): error TS2339: Property 'StonlyWidget' does not exist on type 'Window & typeof globalThis'.
-src/App.vue(260,45): error TS2339: Property 'STONLY_WID' does not exist on type 'Window & typeof globalThis'.
-src/App.vue(267,44): error TS7006: Parameter 's' implicitly has an 'any' type.
-src/App.vue(283,7): error TS2554: Expected 7 arguments, but got 4.
-src/App.vue(285,14): error TS2339: Property 'stonlyTrack' does not exist on type 'Window & typeof globalThis'.
-src/App.vue(285,41): error TS2339: Property 'STONLY_WID' does not exist on type 'Window & typeof globalThis'.
-src/App.vue(288,16): error TS2339: Property 'stonlyTrack' does not exist on type 'Window & typeof globalThis'.
-src/App.vue(293,26): error TS2525: Initializer provides no value for this binding element and the binding element has no default value.
-src/components/__tests__/SortingButton.spec.ts(25,24): error TS2571: Object is of type 'unknown'.
-src/components/__tests__/MyForm.spec.ts(16,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
-src/components/__tests__/MyForm.spec.ts(17,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
-src/components/__tests__/MyForm.spec.ts(29,16): error TS2339: Property 'formData' does not exist on type 'ComponentPublicInstance<NonNullable<Partial<{ type: "multiSelect" | "checkbox-group"; }> & Omit<{ readonly type: "multiSelect" | "checkbox-group"; readonly activeLanguages: ("fr" | "en" | "es" | "de" | "nl" | ... 8 more ... | "pt")[]; readonly selectedLanguages: ("fr" | ... 12 more ... | "pt")[]; onIsValid?: ((value...'.
-src/components/__tests__/MyForm.spec.ts(32,12): error TS2571: Object is of type 'unknown'.
-src/components/__tests__/MyForm.spec.ts(33,61): error TS2339: Property 'dataset' does not exist on type 'VueNode<Element>'.
-src/components/__tests__/MyForm.spec.ts(36,16): error TS2339: Property 'formData' does not exist on type 'ComponentPublicInstance<NonNullable<Partial<{ type: "multiSelect" | "checkbox-group"; }> & Omit<{ readonly type: "multiSelect" | "checkbox-group"; readonly activeLanguages: ("fr" | "en" | "es" | "de" | "nl" | ... 8 more ... | "pt")[]; readonly selectedLanguages: ("fr" | ... 12 more ... | "pt")[]; onIsValid?: ((value...'.
-src/components/__tests__/MyForm.spec.ts(39,12): error TS2571: Object is of type 'unknown'.
-src/components/__tests__/MyForm.spec.ts(40,61): error TS2339: Property 'dataset' does not exist on type 'VueNode<Element>'.
-src/components/__tests__/MyForm.spec.ts(71,23): error TS2339: Property 'getFormattedLanguages' does not exist on type 'ComponentPublicInstance<NonNullable<Partial<{ type: "multiSelect" | "checkbox-group"; }> & Omit<{ readonly type: "multiSelect" | "checkbox-group"; readonly activeLanguages: ("fr" | "en" | "es" | "de" | "nl" | ... 8 more ... | "pt")[]; readonly selectedLanguages: ("fr" | ... 12 more ... | "pt")[]; onIsValid?: ((value...'.
-src/components/__tests__/MyModal.spec.ts(11,9): error TS2740: Type '{ language: "fr"; }' is missing the following properties from type 'User': id, additionalProperties, avatar, birthdate, and 134 more.
-src/components/__tests__/MyModal.spec.ts(23,61): error TS2339: Property 'dataset' does not exist on type 'VueNode<Element>'.
-src/components/__tests__/MyModal.spec.ts(31,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
-src/components/__tests__/MyModal.spec.ts(42,9): error TS2740: Type '{ language: "fr"; }' is missing the following properties from type 'User': id, additionalProperties, avatar, birthdate, and 134 more.
-src/components/__tests__/MyModal.spec.ts(53,24): error TS2339: Property 'submit' does not exist on type 'ComponentPublicInstance<NonNullable<Partial<{}> & Omit<{ readonly activeLanguages: ("fr" | "en" | "es" | "de" | "nl" | "sv" | "da" | "fi" | "ja" | "pl" | "ro" | "cs" | "it" | "pt")[]; readonly me: User; onClose?: (() => any) | undefined; onUpdateWorkingLanguage?: ((value: ("fr" | ... 12 more ... | "pt")[]) => any) |...'.
-src/components/__tests__/MyModal.spec.ts(64,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
-src/components/__tests__/MyModal.spec.ts(72,9): error TS2740: Type '{ language: "fr"; }' is missing the following properties from type 'User': id, additionalProperties, avatar, birthdate, and 134 more.
-src/components/__tests__/MyModal.spec.ts(81,24): error TS2339: Property 'submit' does not exist on type 'ComponentPublicInstance<NonNullable<Partial<{}> & Omit<{ readonly activeLanguages: ("fr" | "en" | "es" | "de" | "nl" | "sv" | "da" | "fi" | "ja" | "pl" | "ro" | "cs" | "it" | "pt")[]; readonly me: User; onClose?: (() => any) | undefined; onUpdateWorkingLanguage?: ((value: ("fr" | ... 12 more ... | "pt")[]) => any) |...'.
-src/components/MyActionsGroup.vue(25,56): error TS2339: Property 'filter' does not exist on type 'string | VNodeArrayChildren | RawSlots'.
-  Property 'filter' does not exist on type 'string'.
-src/components/MyActionsGroup.vue(25,64): error TS7006: Parameter 'slot' implicitly has an 'any' type.
-src/components/MyActionsGroup.vue(59,35): error TS7006: Parameter 'vnode' implicitly has an 'any' type.
-src/components/MyActionsGroup.vue(59,42): error TS7006: Parameter 'i' implicitly has an 'any' type.
-src/components/MyActionsGroup.vue(66,29): error TS7006: Parameter 'e' implicitly has an 'any' type.
-src/components/Comp1.vue(110,17): error TS2769: No overload matches this call.
+src/index.ts(3,15): error TS2339: Property 'createApp' does not exist on type 'Vue'.
+src/index.ts(10,8): error TS2740: Type '{ title: string; }' is missing the following properties from type 'Document': body, head.
+src/index.ts(17,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+src/index.ts(24,23): error TS2339: Property 'mount' does not exist on type 'ComponentPublicInstance'.
+src/index.ts(31,16): error TS2571: Object is of type 'unknown'.
+src/index.ts(38,12): error TS2339: Property 'unmount' does not exist on type 'ComponentPublicInstance'.
+src/index.ts(45,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+src/index.ts(52,23): error TS2339: Property 'getFormattedApp' does not exist on type 'ComponentPublicInstance'.
+src/index.ts(59,16): error TS2571: Object is of type 'unknown'.
+src/index.ts(66,12): error TS2339: Property 'dataset' does not exist on type 'VueNode<Element>'.
+src/index.ts(73,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+src/index.ts(80,23): error TS2339: Property 'getFormattedIndex' does not exist on type 'ComponentPublicInstance'.
+src/index.ts(87,16): error TS2571: Object is of type 'unknown'.
+src/index.ts(94,12): error TS2339: Property 'dataset' does not exist on type 'VueNode<Element>'.
+src/index.ts(101,11): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+src/index.ts(108,23): error TS2339: Property 'getFormattedMain' does not exist on type 'ComponentPublicInstance'.
+src/index.ts(115,16): error TS2571: Object is of type 'unknown'.
+src/index.ts(122,12): error TS2339: Property 'dataset' does not exist on type 'VueNode<Element>'.
+src/index.ts(129,11): error TS2464: No overload matches this call.
   Overload 1 of 3, '(callbackfn: (previousValue: { docx: string; name: string; pptx: string; old?: boolean | undefined; }, currentValue: { docx: string; name: string; pptx: string; old?: boolean | undefined; }, currentIndex: number, array: { ...; }[]) => { ...; }, initialValue: { ...; }): { ...; }', gave the following error.
     Argument of type '(templates: never[], template: { docx: string; name: string; pptx: string; old?: boolean | undefined; }) => { file: string; name: string; extension: string; }[]' is not assignable to parameter of type '(previousValue: { docx: string; name: string; pptx: string; old?: boolean | undefined; }, currentValue: { docx: string; name: string; pptx: string; old?: boolean | undefined; }, currentIndex: number, array: { ...; }[]) => { ...; }'.
       Types of parameters 'templates' and 'previousValue' are incompatible.
@@ -54,155 +53,3 @@ src/components/Comp1.vue(110,17): error TS2769: No overload matches this call.
     Argument of type '(templates: never[], template: { docx: string; name: string; pptx: string; old?: boolean | undefined; }) => { file: string; name: string; extension: string; }[]' is not assignable to parameter of type '(previousValue: never[], currentValue: { docx: string; name: string; pptx: string; old?: boolean | undefined; }, currentIndex: number, array: { docx: string; name: string; pptx: string; old?: boolean | undefined; }[]) => never[]'.
       Type '{ file: string; name: string; extension: string; }[]' is not assignable to type 'never[]'.
         Type '{ file: string; name: string; extension: string; }' is not assignable to type 'never'.
-src/components/Comp1.vue(120,10): error TS2339: Property 'sort' does not exist on type '{ docx: string; name: string; pptx: string; old?: boolean | undefined; }'.
-src/components/Comp1.vue(130,11): error TS7006: Parameter 'file' implicitly has an 'any' type.
-src/components/Comp1.vue(132,52): error TS7006: Parameter 't' implicitly has an 'any' type.
-src/components/Comp1.vue(152,42): error TS7031: Binding element 'name' implicitly has an 'any' type.
-src/components/Comp1.vue(152,48): error TS7031: Binding element 'extension' implicitly has an 'any' type.
-src/components/Comp1.vue(154,12): error TS7006: Parameter 'event' implicitly has an 'any' type.
-src/components/Comp2.vue(5,32): error TS18046: '__VLS_ctx.metric' is of type 'unknown'.
-src/components/Comp2.vue(41,18): error TS7006: Parameter 'type' implicitly has an 'any' type.
-src/components/Comp2.vue(49,14): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ gauge: DefineComponent<{ metric: { type: StringConstructor; default: null; }; min: { type: NumberConstructor; default: number; }; max: { type: NumberConstructor; default: number; }; ... 5 more ...; backgroundColor: { ...; }; }, ... 11 more ..., {}>; number: __VLS_WithTemplateSlots<...>; table: DefineComponent<...>...'.
-src/components/MyNav.vue(44,31): error TS2339: Property 'context' does not exist on type '{ userId: string | string[]; translate: string | string[]; } | { userId: string | string[]; } | { userId: string | string[]; } | { userId: string | string[]; } | { userId: string | string[]; } | ... 60 more ... | { ...; }'.
-  Property 'context' does not exist on type '{ userId: string | string[]; translate: string | string[]; }'.
-src/components/MyNav.vue(49,35): error TS2339: Property 'context' does not exist on type '{ userId: string | string[]; translate: string | string[]; } | { userId: string | string[]; } | { userId: string | string[]; } | { userId: string | string[]; } | { userId: string | string[]; } | ... 60 more ... | { ...; }'.
-  Property 'context' does not exist on type '{ userId: string | string[]; translate: string | string[]; }'.
-src/components/MyNav.vue(50,28): error TS2339: Property 'context' does not exist on type '{ userId: string | string[]; translate: string | string[]; } | { userId: string | string[]; } | { userId: string | string[]; } | { userId: string | string[]; } | { userId: string | string[]; } | ... 60 more ... | { ...; }'.
-  Property 'context' does not exist on type '{ userId: string | string[]; translate: string | string[]; }'.
-src/components/MyNav.vue(60,31): error TS2339: Property 'context' does not exist on type '{ userId: string | string[]; translate: string | string[]; } | { userId: string | string[]; } | { userId: string | string[]; } | { userId: string | string[]; } | { userId: string | string[]; } | ... 60 more ... | { ...; }'.
-  Property 'context' does not exist on type '{ userId: string | string[]; translate: string | string[]; }'.
-src/components/MyDocumentUploader.vue(10,7): error TS2322: Type '({ name, raw, size }?: { name: any; raw: any; size: any; }) => void' is not assignable to type '(uploadFile: UploadFile, uploadFiles: UploadFiles) => void'.
-src/components/MyDocumentUploader.vue(11,7): error TS2322: Type 'null' is not assignable to type 'boolean | undefined'.
-src/components/MyDocumentUploader.vue(81,22): error TS2525: Initializer provides no value for this binding element and the binding element has no default value.
-src/components/MyDocumentUploader.vue(93,9): error TS2322: Type '"file_size"' is not assignable to type 'null'.
-src/components/MyDocumentUploader.vue(105,35): error TS2769: No overload matches this call.
-  Overload 1 of 3, '(name: string, value: string | Blob): void', gave the following error.
-    Argument of type 'number' is not assignable to parameter of type 'string | Blob'.
-  Overload 2 of 3, '(name: string, value: string): void', gave the following error.
-    Argument of type 'number' is not assignable to parameter of type 'string'.
-  Overload 3 of 3, '(name: string, blobValue: Blob, filename?: string | undefined): void', gave the following error.
-    Argument of type 'number' is not assignable to parameter of type 'Blob'.
-src/components/MyDocumentUploader.vue(109,80): error TS2531: Object is possibly 'null'.
-src/components/MyDocumentUploader.vue(116,27): error TS2739: Type 'FormData' is missing the following properties from type 'AxiosResponse<any, any>': data, status, statusText, headers, config
-src/components/MyDocumentUploader.vue(120,13): error TS2322: Type '"unsupported"' is not assignable to type 'null'.
-src/components/MyDocumentUploader.vue(122,13): error TS2322: Type '"extract"' is not assignable to type 'null'.
-src/components/MyForm2.vue(5,5): error TS2322: Type '{ name: { required: boolean; transform: (value?: string) => string; trigger: string; }[]; durationDate: { type: string; message: string; trigger: string; }[] | undefined; durationDatePrecision: { ...; }[] | undefined; startDate: { ...; }[] | undefined; endDate: { ...; }[] | undefined; }' is not assignable to type 'Partial<Record<string, Arrayable<FormItemRule>>>'.
-src/components/MyForm2.vue(46,15): error TS7053: Element implicitly has an 'any' type because expression of type '`${string}Date`' can't be used to index type '{ name: { required: boolean; transform: (value?: string) => string; trigger: string; }[]; durationDate: { type: string; message: string; trigger: string; }[] | undefined; durationDatePrecision: { ...; }[] | undefined; startDate: { ...; }[] | undefined; endDate: { ...; }[] | undefined; }'.
-src/components/MyForm2.vue(63,9): error TS2322: Type 'string' is not assignable to type '"start" | "end"'.
-src/components/MyForm2.vue(93,49): error TS2322: Type '{ type: string; message: string; trigger: string; }[] | undefined' is not assignable to type 'EpPropMergeType<(new (...args: any[]) => FormItemRule | FormItemRule[]) | (() => Arrayable<FormItemRule>) | ((new (...args: any[]) => FormItemRule | FormItemRule[]) | (() => Arrayable<...>))[], unknown, unknown> | undefined'.
-src/components/MyForm2.vue(103,58): error TS2322: Type '{ required: boolean; type: string; message: string; trigger: string; }[] | undefined' is not assignable to type 'EpPropMergeType<(new (...args: any[]) => FormItemRule | FormItemRule[]) | (() => Arrayable<FormItemRule>) | ((new (...args: any[]) => FormItemRule | FormItemRule[]) | (() => Arrayable<...>))[], unknown, unknown> | undefined'.
-src/components/MyForm2.vue(104,73): error TS2322: Type '"hours" | "days" | null' is not assignable to type 'string | number | boolean | Record<string, any> | unknown[] | undefined'.
-src/components/MyForm2.vue(164,10): error TS2322: Type '(myParam: MyParam) => void' is not assignable to type '(data: { id: number; }) => any'.
-  Types of parameters 'myParam' and 'data' are incompatible.
-    Type '{ id: number }' is missing the following properties from type 'MyParam': name, description, and 55 more.
-src/components/MyForm2.vue(175,27): error TS2345: Argument of type '{ [x: string]: any; id: number; z: { [x: string]: any; id: number; additionalProperties: Record<...>; ... 125 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => El...' is not assignable to parameter of type 'MyParam'.
-src/components/MyForm2.vue(178,13): error TS2322: Type '{ [x: string]: any; id: number; z: { [x: string]: any; id: number; additionalProperties: Record<...>; ... 125 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => El...' is not assignable to type 'MyParam'.
-src/components/MyForm2.vue(181,39): error TS2345: Argument of type '{ [x: string]: any; id: number; z: { [x: string]: any; id: number; additionalProperties: Record<...>; ... 125 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => El...' is not assignable to parameter of type 'MyParam'.
-src/components/MyForm2.vue(187,13): error TS2322: Type '{ [x: string]: any; id: number; z: { [x: string]: any; id: number; additionalProperties: Record<...>; ... 125 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => El...' is not assignable to type 'MyParam | undefined'.
-src/components/MyForm2.vue(190,38): error TS2345: Argument of type '{ [x: string]: any; id: number; z: { [x: string]: any; id: number; additionalProperties: Record<...>; ... 125 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => El...' is not assignable to parameter of type 'MyParam'.
-src/components/MyForm2.vue(230,32): error TS2345: Argument of type '{ [x: string]: any; id: number; additionalProperties: Record<string, string | string[]>; avatar: string | null; birthdate: string | null; canDelete: boolean; ... 121 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => Element; }' is not assignable to parameter of type 'User'.
-  Type '{ [x: string]: any; id: number; additionalProperties: Record<string, string | string[]>; avatar: string | null; birthdate: string | null; canDelete: boolean; ... 121 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => Element; }' is missing the following properties from type 'User': $boot, $initializeSchema, $fillMeta, $fillField, and 7 more.
-src/components/MyForm2.vue(236,63): error TS2769: No overload matches this call.
-  The last overload gave the following error.
-    Argument of type 'boolean' is not assignable to parameter of type 'number'.
-src/components/MyForm2.vue(265,11): error TS2322: Type '{ [x: string]: any; id: number; attachments: { id: number; projectId: string; name: string; location: string; thumbnailLocation: string; type: ObjectValues<{ readonly LINK: 1; readonly IMAGE: 2; readonly DOCUMENT: 3; }>; creationDate: string; modificationDate: string; file?: { ...; } | undefined; }[]; ... 54 more .....' is not assignable to type 'Experience'.
-src/components/MyForm2.vue(270,34): error TS2345: Argument of type '{ [x: string]: any; id: number; attachments: { id: number; projectId: string; name: string; location: string; thumbnailLocation: string; type: ObjectValues<{ readonly LINK: 1; readonly IMAGE: 2; readonly DOCUMENT: 3; }>; creationDate: string; modificationDate: string; file?: { ...; } | undefined; }[] & { ...; }[]; ....' is not assignable to parameter of type 'Experience'.
-  Type '{ [x: string]: any; id: number; attachments: { id: number; projectId: string; name: string; location: string; thumbnailLocation: string; type: ObjectValues<{ readonly LINK: 1; readonly IMAGE: 2; readonly DOCUMENT: 3; }>; creationDate: string; modificationDate: string; file?: { ...; } | undefined; }[] & { ...; }[]; ....' is missing the following properties from type 'Experience': $boot, $initializeSchema, $fillMeta, $fillField, and 7 more.
-src/components/MyForm2.vue(312,63): error TS2322: Type 'Partial<ProjectAttachment>' is not assignable to type 'ProjectAttachment'.
-  Types of property 'id' are incompatible.
-    Type 'number | undefined' is not assignable to type 'number'.
-      Type 'undefined' is not assignable to type 'number'.
-src/components/MyForm2.vue(320,63): error TS2322: Type 'Partial<ProjectAttachment>' is not assignable to type 'ProjectAttachment'.
-src/components/MyForm2.vue(768,3): error TS2322: Type '({ [x: string]: any; id: number; z: { [x: string]: any; id: number; MyParamId: number; author: { [x: string]: any; id: number; additionalProperties: Record<...>; ... 125 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => E...' is not assignable to type '{ [x: string]: any; id: number; z: { [x: string]: any; id: number; MyParamId: number; author: { [x: string]: any; id: number; additionalProperties: Record<...>; ... 125 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => El...'.
-  Type '{ [x: string]: any; id: number; z: { [x: string]: any; id: number; MyParamId: number; author: { [x: string]: any; id: number; additionalProperties: Record<...>; ... 125 more ...; $toJson: (model?: import("/my-project/frontend/...' is not assignable to type '{ [x: string]: any; id: number; z: { [x: string]: any; id: number; MyParamId: number; author: { [x: string]: any; id: number; additionalProperties: Record<...>; ... 125 more ...; $toJson: (model?: import("/my-project/frontend/...'. Two different types with this name exist, but they are unrelated.
-    Type '{ id: number | undefined; name: string; suggestedFrom: "Text extraction"; description: string | undefined; }' is missing the following properties from type '{ [x: string]: any; id: number; z: { [x: string]: any; id: number; MyParamId: number; author: { [x: string]: any; id: number; additionalProperties: Record<...>; ... 125 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => El...': z, zs, categoryName, MyParamId, and 47 more.
-src/components/MyForm2.vue(778,19): error TS2339: Property 'id' does not exist on type '{ target: string; }'.
-src/components/MyForm2.vue(870,10): error TS2769: No overload matches this call.
-  Overload 1 of 4, '(evt: "change", f: { [x: string]: any; id: number; attachments: { id: number; projectId: string; name: string; location: string; thumbnailLocation: string; type: ObjectValues<{ readonly LINK: 1; readonly IMAGE: 2; readonly DOCUMENT: 3; }>; creationDate: string; modificationDate: string; file?: { ...; } | undefined; }[] & { ...; }[]; ... 54 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => Element; }): void', gave the following error.
-    Argument of type '"update" | "create"' is not assignable to parameter of type '"change"'.
-      Type '"update"' is not assignable to type '"change"'.
-  Overload 2 of 4, '(evt: "update", f: { [x: string]: any; id: number; attachments: { id: number; projectId: string; name: string; location: string; thumbnailLocation: string; type: ObjectValues<{ readonly LINK: 1; readonly IMAGE: 2; readonly DOCUMENT: 3; }>; creationDate: string; modificationDate: string; file?: { ...; } | undefined; }[] & { ...; }[]; ... 54 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => Element; }): void', gave the following error.
-    Argument of type '"update" | "create"' is not assignable to parameter of type '"update"'.
-      Type '"create"' is not assignable to type '"update"'.
-  Overload 3 of 4, '(evt: "create", f: { [x: string]: any; id: number; attachments: { id: number; projectId: string; name: string; location: string; thumbnailLocation: string; type: ObjectValues<{ readonly LINK: 1; readonly IMAGE: 2; readonly DOCUMENT: 3; }>; creationDate: string; modificationDate: string; file?: { ...; } | undefined; }[] & { ...; }[]; ... 54 more ...; $toJson: (model?: Model | undefined, options?: ModelOptions | undefined) => Element; }): void', gave the following error.
-    Argument of type '"update" | "create"' is not assignable to parameter of type '"create"'.
-      Type '"update"' is not assignable to type '"create"'.
-src/components/MyModal2.vue(30,7): error TS2322: Type 'Partial<Experience>' is not assignable to type 'Experience'.
-src/components/MyModal2.vue(34,87): error TS2769: No overload matches this call.
-  Overload 1 of 2, '(searchElement: string, fromIndex?: number | undefined): boolean', gave the following error.
-    Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
-  Overload 2 of 2, '(searchElement: "certification", fromIndex?: number | undefined): boolean', gave the following error.
-    Argument of type 'EXPERIENCE_TYPES | undefined' is not assignable to parameter of type '"certification"'.
-src/components/MyModal2.vue(39,8): error TS2322: Type '(experienceToUpdate: Experience) => Promise<void>' is not assignable to type '(f: { [x: string]: any; id: number; attachments: { id: number; projectId: string; name: string; location: string; thumbnailLocation: string; type: ObjectValues<{ readonly LINK: 1; readonly IMAGE: 2; readonly DOCUMENT: 3; }>; creationDate: string; modificationDate: string; file?: { ...; } | undefined; }[] & { ...; }[...'.
-  Types of parameters 'experienceToUpdate' and 'f' are incompatible.
-    Type '{ [x: string]: any; id: number; attachments: { id: number; projectId: string; name: string; location: string; thumbnailLocation: string; type: ObjectValues<{ readonly LINK: 1; readonly IMAGE: 2; readonly DOCUMENT: 3; }>; creationDate: string; modificationDate: string; file?: { ...; } | undefined; }[] & { ...; }[]; ....' is not assignable to type 'Experience'.
-src/components/MyModal2.vue(40,8): error TS2322: Type '(experienceToCreate: Experience) => Promise<void>' is not assignable to type '(f: { [x: string]: any; id: number; attachments: { id: number; projectId: string; name: string; location: string; thumbnailLocation: string; type: ObjectValues<{ readonly LINK: 1; readonly IMAGE: 2; readonly DOCUMENT: 3; }>; creationDate: string; modificationDate: string; file?: { ...; } | undefined; }[] & { ...; }[...'.
-  Types of parameters 'experienceToCreate' and 'f' are incompatible.
-    Type '{ [x: string]: any; id: number; attachments: { id: number; projectId: string; name: string; location: string; thumbnailLocation: string; type: ObjectValues<{ readonly LINK: 1; readonly IMAGE: 2; readonly DOCUMENT: 3; }>; creationDate: string; modificationDate: string; file?: { ...; } | undefined; }[] & { ...; }[]; ....' is not assignable to type 'Experience'.
-src/components/MyModal2.vue(51,36): error TS2345: Argument of type 'Partial<Experience>' is not assignable to parameter of type 'Experience'.
-src/components/Comp3.vue(26,22): error TS2322: Type 'null' is not assignable to type 'string | number | boolean | Record<string, any> | unknown[] | undefined'.
-src/components/Comp3.vue(101,14): error TS2533: Object is possibly 'null' or 'undefined'.
-src/components/Comp3.vue(109,7): error TS2571: Object is of type 'unknown'.
-src/components/Comp3.vue(109,40): error TS7006: Parameter 'valid' implicitly has an 'any' type.
-src/components/Comp3.vue(131,18): error TS2345: Argument of type 'null' is not assignable to parameter of type 'string | number | (string | number)[]'.
-src/components/Comp4.vue(36,36): error TS2322: Type '_DeepPartialObject<CoreChartOptions<keyof ChartTypeRegistry> & ElementChartOptions<keyof ChartTypeRegistry> & PluginChartOptions<...> & DatasetChartOptions<...> & ScaleChartOptions<...>>' is not assignable to type '_DeepPartialObject<CoreChartOptions<"line"> & ElementChartOptions<"line"> & PluginChartOptions<"line"> & DatasetChartOptions<"line"> & ScaleChartOptions<...> & LineControllerChartOptions>'.
-src/components/Comp4.vue(36,60): error TS2322: Type 'ChartData<"line", ItemChartData[], unknown>' is not assignable to type 'ChartData<"line", (number | Point | null)[], unknown>'.
-src/components/Comp5.vue(44,54): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp5.vue(59,17): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp5.vue(71,17): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp5.vue(83,17): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp5.vue(94,29): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp5.vue(106,29): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp5.vue(140,33): error TS18048: 'props.data' is possibly 'undefined'.
-src/components/Comp5.vue(140,44): error TS2339: Property 'good_squares' does not exist on type '{}'.
-src/components/Comp5.vue(141,14): error TS18048: 'props.data' is possibly 'undefined'.
-src/components/Comp5.vue(141,25): error TS2339: Property 'good_squares' does not exist on type '{}'.
-src/components/Comp5.vue(154,33): error TS18048: 'props.data' is possibly 'undefined'.
-src/components/Comp5.vue(154,44): error TS2339: Property 'bad_squares' does not exist on type '{}'.
-src/components/Comp5.vue(155,14): error TS18048: 'props.data' is possibly 'undefined'.
-src/components/Comp5.vue(155,25): error TS2339: Property 'bad_squares' does not exist on type '{}'.
-src/components/Comp5.vue(194,33): error TS18048: 'props.data' is possibly 'undefined'.
-src/components/Comp5.vue(194,44): error TS2339: Property 'good_squares' does not exist on type '{}'.
-src/components/Comp5.vue(197,18): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ 0: string; 1: string; 2: string; 3: string; 4: string; 5: string; 6: string; 7: string; 8: string; 9: string; 10: string; 11: string; 12: string; 13: string; 14: string; 15: string; 16: string; 17: string; 18: string; 19: string; }'.
-  No index signature with a parameter of type 'string' was found on type '{ 0: string; 1: string; 2: string; 3: string; 4: string; 5: string; 6: string; 7: string; 8: string; 9: string; 10: string; 11: string; 12: string; 13: string; 14: string; 15: string; 16: string; 17: string; 18: string; 19: string; }'.
-src/components/Comp5.vue(211,33): error TS18048: 'props.data' is possibly 'undefined'.
-src/components/Comp5.vue(211,44): error TS2339: Property 'bad_squares' does not exist on type '{}'.
-src/components/Comp5.vue(214,18): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ 0: string; 1: string; 2: string; 3: string; 4: string; 5: string; 6: string; 7: string; 8: string; 9: string; 10: string; 11: string; 12: string; 13: string; 14: string; 15: string; 16: string; 17: string; 18: string; 19: string; }'.
-  No index signature with a parameter of type 'string' was found on type '{ 0: string; 1: string; 2: string; 3: string; 4: string; 5: string; 6: string; 7: string; 8: string; 9: string; 10: string; 11: string; 12: string; 13: string; 14: string; 15: string; 16: string; 17: string; 18: string; 19: string; }'.
-src/components/Comp6.vue(3,70): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(4,23): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(5,20): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(7,23): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(8,61): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(10,23): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(10,67): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(13,71): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(14,23): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(16,46): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(18,23): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(19,59): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(21,23): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(22,26): error TS18046: '__VLS_ctx.data' is of type 'unknown'.
-src/components/Comp6.vue(84,46): error TS2769: No overload matches this call.
-  Overload 1 of 2, '(o: {}): string[]', gave the following error.
-    Argument of type 'unknown' is not assignable to parameter of type '{}'.
-  Overload 2 of 2, '(o: object): string[]', gave the following error.
-    Argument of type 'unknown' is not assignable to parameter of type 'object'.
-src/components/Comp7.vue(23,15): error TS18049: 'foo' is possibly 'null' or 'undefined'.
-src/components/Comp7.vue(23,33): error TS2339: Property 'name' does not exist on type 'string | number | MyParam[]'.
-  Property 'name' does not exist on type 'string'.
-src/components/Comp7.vue(24,23): error TS18049: 'foo' is possibly 'null' or 'undefined'.
-src/components/Comp7.vue(24,41): error TS2339: Property 'bar' does not exist on type 'string | number | MyParam[]'.
-  Property 'bar' does not exist on type 'string'.
-src/components/Comp7.vue(31,18): error TS18049: 'foo' is possibly 'null' or 'undefined'.
-src/components/Comp7.vue(31,36): error TS2339: Property 'myArray' does not exist on type 'string | number | MyParam[]'.
-  Property 'myArray' does not exist on type 'string'.
-src/components/Comp7.vue(77,40): error TS2769: No overload matches this call.
-  Overload 1 of 3, '(callbackfn: (previousValue: Category, currentValue: Category, currentIndex: number, array: Category[]) => Category, initialValue: Category): Category', gave the following error.
-    Argument of type '(acc: never[], category: Category) => { myArray: MyParam[]; name: string; bar: string; parentId?: number | null | undefined; }[]' is not assignable to parameter of type '(previousValue: Category, currentValue: Category, currentIndex: number, array: Category[]) => Category'.
-      Types of parameters 'acc' and 'previousValue' are incompatible.
-        Type 'Category' is missing the following properties from type 'never[]': length, pop, push, concat, and 29 more.
-  Overload 2 of 3, '(callbackfn: (previousValue: never[], currentValue: Category, currentIndex: number, array: Category[]) => never[], initialValue: never[]): never[]', gave the following error.
-    Argument of type '(acc: never[], category: Category) => { myArray: MyParam[]; name: string; bar: string; parentId?: number | null | undefined; }[]' is not assignable to parameter of type '(previousValue: never[], currentValue: Category, currentIndex: number, array: Category[]) => never[]'.
-      Type '{ myArray: MyParam[]; name: string; bar: string; parentId?: number | null | undefined; }[]' is not assignable to type 'never[]'.
-        Type '{ myArray: MyParam[]; name: string; bar: string; parentId?: number | null | undefined; }' is not assignable to type 'never'.
