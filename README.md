@@ -43,7 +43,7 @@ export default {
   ignoredTsErrorCodes: [ // ts error codes to ignore
     'TS2322'
   ],
-  fullOutput: false, // get full output errors (default: false)
+  fullOutputErrors: false, // get full output errors (default: false)
 } satisfies TypestepConfig
 ```
 

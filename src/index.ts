@@ -116,7 +116,7 @@ export function getOutput({ tscErrors, ignoredFilesWithoutErrors, ignoredTsError
     consola.error(`Found ${tscErrors.length} tsc errors in ${errorFiles.length} files:`)
     consola.box(errorFiles.join('\n'))
 
-    if (config?.fullOutput)
+    if (config?.fullOutputErrors)
       consola.log(tscErrors.map(tscErrorToString).join('\n'))
   }
 

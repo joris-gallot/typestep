@@ -12,7 +12,7 @@ export type ConfigIgnoredFilesOptions = true | {
 export interface TypestepConfig {
   ignoredFiles?: Record<string, ConfigIgnoredFilesOptions>
   ignoredTsErrorCodes?: Array<string>
-  fullOutput?: boolean
+  fullOutputErrors?: boolean
 }
 
 export interface TypestepArgsCli {

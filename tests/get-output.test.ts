@@ -56,13 +56,13 @@ describe('getOutput', () => {
     expect(consola.log).not.toHaveBeenCalled()
   })
 
-  it('should return true and log only tsc errors with fullOutput', () => {
+  it('should return true and log only tsc errors with fullOutputErrors', () => {
     const tscErrors = [mockTscError, { ...mockTscError, path: 'src/file2.ts' }]
     const result = getOutput({
       tscErrors,
       ignoredFilesWithoutErrors: [],
       ignoredTsErrorCodesWithoutErrors: [],
-    }, { fullOutput: true })
+    }, { fullOutputErrors: true })
 
     expect(result).toBe(true)
     expect(consola.error).toHaveBeenCalledTimes(1)
