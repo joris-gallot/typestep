@@ -10,7 +10,6 @@ on:
       - '**/*.gitignore'
       - LICENSE
 
-
 jobs:
   typecheck:
     runs-on: ubuntu-latest
