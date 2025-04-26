@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import type { TypestepConfig, TypestepConfigCli } from '../types.js'
+import type { TypestepArgsCli, TypestepConfig } from '../types.js'
 import { existsSync } from 'node:fs'
 import { readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
@@ -10,7 +10,7 @@ import { CONFIG_FILE_NAME } from '../constants.js'
 import { parseTscOutput } from '../index.js'
 import { consola, uniqArray, writeTypestepConfig } from '../utils.js'
 
-export async function generateInitialConfig({ tscOutputFile, ignoreFiles, ignoreTsErrorCodes }: TypestepConfigCli): Promise<TypestepConfig> {
+export async function generateInitialConfig({ tscOutputFile, ignoreFiles, ignoreTsErrorCodes }: TypestepArgsCli): Promise<TypestepConfig> {
   const tscOutput = await readFile(tscOutputFile, 'utf8')
   const parsedTscOutput = parseTscOutput(tscOutput)
 
@@ -23,7 +23,7 @@ export async function generateInitialConfig({ tscOutputFile, ignoreFiles, ignore
 }
 
 /* v8 ignore next 11 - ignore coverage for writeFile */
-async function initConfig(configCli: TypestepConfigCli) {
+async function initConfig(configCli: TypestepArgsCli) {
   const config = await generateInitialConfig(configCli)
 
   try {

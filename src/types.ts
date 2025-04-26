@@ -11,7 +11,7 @@ export interface TypestepConfig {
   fullOutput?: boolean
 }
 
-export interface TypestepConfigCli {
+export interface TypestepArgsCli {
   tscOutputFile: string
   ignoreFiles?: boolean
   ignoreTsErrorCodes?: boolean
