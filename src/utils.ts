@@ -32,6 +32,4 @@ export function uniqArray<T>(array?: Array<T>) {
   return [...new Set(array || [])]
 }
 
-export const consola = createConsola({
-  fancy: true,
-})
+export const consola = createConsola()
