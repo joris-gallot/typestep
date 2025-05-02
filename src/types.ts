@@ -16,6 +16,8 @@ interface ConfigIgnoredFilesOptions {
   ignoredTsErrorCodes: NonEmptyArray<string>
 }
 
+type CustomFilter = (error: Omit<TscError, 'path'>) => boolean
+
 /**
  * Typestep configuration
  * @interface TypestepConfig
@@ -25,8 +27,9 @@ export interface TypestepConfig {
    * Record of files to ignore, either completely or with specific error codes
    * - `true`: ignore all errors in the file
    * - `ConfigIgnoredFilesOptions`: ignore only specific error codes
+   * - `CustomFilter`: ignore errors based on a custom filter function
    */
-  ignoredFiles?: Record<string, true | ConfigIgnoredFilesOptions>
+  ignoredFiles?: Record<string, true | ConfigIgnoredFilesOptions | CustomFilter>
 
   /** Global TypeScript error codes to ignore across all files */
   ignoredTsErrorCodes?: Array<string>

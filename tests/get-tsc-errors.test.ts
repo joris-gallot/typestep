@@ -224,6 +224,114 @@ describe('ignored files and codes', () => {
     ])
     expect(ignoredTsErrorCodesWithoutErrors).toStrictEqual(['TS8888'])
   })
+
+  it('file with custom filter that matches all errors', async () => {
+    const { ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': error => ['TS2339', 'TS2571'].includes(error.tsCode),
+      },
+    })
+
+    expect(ignoredFilesWithoutErrors).toStrictEqual([
+      {
+        file: 'src/App.vue',
+        missingCodes: ['TS2769'],
+        type: 'codes',
+      },
+    ])
+  })
+
+  it('file with custom filter that matches no errors', async () => {
+    const { ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': error => error.tsCode === 'TS9999',
+      },
+    })
+
+    expect(ignoredFilesWithoutErrors).toStrictEqual([
+      {
+        file: 'src/App.vue',
+        missingCodes: ['TS2339', 'TS2571', 'TS2339', 'TS2769'],
+        type: 'codes',
+      },
+    ])
+  })
+
+  it('file with custom filter that matches some errors', async () => {
+    const { ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': error => error.tsCode === 'TS2339',
+      },
+    })
+
+    expect(ignoredFilesWithoutErrors).toStrictEqual([
+      {
+        file: 'src/App.vue',
+        missingCodes: ['TS2571', 'TS2769'],
+        type: 'codes',
+      },
+    ])
+  })
+
+  it('multiple files with different custom filter configurations', async () => {
+    const { ignoredFilesWithoutErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': error => error.tsCode === 'TS2339',
+        'src/components/Button.test.tsx': error => error.tsCode === 'TS2464',
+        'non-existent-file.ts': error => error.tsCode === 'TS1234',
+      },
+    })
+
+    expect(ignoredFilesWithoutErrors).toStrictEqual([
+      {
+        file: 'src/App.vue',
+        missingCodes: ['TS2571', 'TS2769'],
+        type: 'codes',
+      },
+      {
+        file: 'src/components/Button.test.tsx',
+        missingCodes: ['TS2339', 'TS2571', 'TS2339', 'TS2339'],
+        type: 'codes',
+      },
+      {
+        file: 'non-existent-file.ts',
+        missingCodes: [],
+        type: 'all',
+      },
+    ])
+  })
+
+  it('mix of custom filter and other ignored file configurations', async () => {
+    const { ignoredFilesWithoutErrors, ignoredTsErrorCodesWithoutErrors } = getTscErrors(parsedTscOutput, {
+      ignoredFiles: {
+        'src/App.vue': error => error.tsCode === 'TS2339',
+        'non-existent-file.ts': () => true,
+        'src/components/Button.test.tsx': {
+          ignoredTsErrorCodes: ['TS2464', 'TS8888'],
+        },
+      },
+      ignoredTsErrorCodes: ['TS2464', 'TS8888'],
+    })
+
+    expect(ignoredFilesWithoutErrors).toStrictEqual([
+      {
+        file: 'src/App.vue',
+        missingCodes: ['TS2571', 'TS2769'],
+        type: 'codes',
+      },
+      {
+        file: 'non-existent-file.ts',
+        missingCodes: [],
+        type: 'all',
+      },
+      {
+        file: 'src/components/Button.test.tsx',
+        missingCodes: ['TS8888'],
+        type: 'codes',
+      },
+    ])
+    expect(ignoredTsErrorCodesWithoutErrors).toStrictEqual(['TS8888'])
+  })
 })
 
 describe('tsc errors', () => {

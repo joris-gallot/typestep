@@ -50,12 +50,12 @@ export function shouldIgnoreFile({
   file,
   ignoredFile,
   ignoredFileOptions,
-  tsCode,
+  tsError,
 }: {
   file: string
   ignoredFile: string
   ignoredFileOptions: NonNullable<TypestepConfig['ignoredFiles']>[string]
-  tsCode: string
+  tsError: Omit<TscError, 'path'>
 }): boolean {
   if (file !== ignoredFile)
     return false
@@ -63,7 +63,10 @@ export function shouldIgnoreFile({
   if (ignoredFileOptions === true)
     return true
 
-  return ignoredFileOptions.ignoredTsErrorCodes.includes(tsCode)
+  if (typeof ignoredFileOptions === 'function')
+    return ignoredFileOptions(tsError)
+
+  return ignoredFileOptions.ignoredTsErrorCodes.includes(tsError.tsCode)
 }
 
 export function getTscErrors(parsedTscOutput: Array<TscError>, config?: TypestepConfig) {
@@ -89,6 +92,15 @@ export function getTscErrors(parsedTscOutput: Array<TscError>, config?: Typestep
           missingCodes: fileErrors.length === 0 ? [] : undefined,
         }
       }
+      else if (typeof fileConfig === 'function') {
+        const missingCodes = fileErrors.filter(error => !fileConfig(error)).map(error => error.tsCode)
+        const isAll = missingCodes.length === 0
+        return {
+          file: ignoredFile,
+          type: isAll ? 'all' as const : 'codes' as const,
+          missingCodes: isAll ? [] : missingCodes,
+        }
+      }
       else {
         // File has specific error codes ignored
         const missingCodes = fileConfig.ignoredTsErrorCodes.filter(code =>
@@ -102,8 +114,13 @@ export function getTscErrors(parsedTscOutput: Array<TscError>, config?: Typestep
       }
     }).filter(result => result.missingCodes !== undefined)
 
-    tscErrors = tscErrors.filter(({ path, tsCode }) => !Object.keys(ignoredFiles).some((ignoredFile) => {
-      return shouldIgnoreFile({ file: path, ignoredFile, ignoredFileOptions: ignoredFiles[ignoredFile], tsCode })
+    tscErrors = tscErrors.filter(({ path, tsCode, cursor, error }) => !Object.keys(ignoredFiles).some((ignoredFile) => {
+      return shouldIgnoreFile({
+        file: path,
+        ignoredFile,
+        ignoredFileOptions: ignoredFiles[ignoredFile],
+        tsError: { tsCode, cursor, error },
+      })
     }))
   }
 
