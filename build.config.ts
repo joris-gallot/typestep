@@ -11,5 +11,12 @@ export default defineBuildConfig([
   },
   {
     entries: ['src/cli.ts'],
+    rollup: {
+      output: {
+        entryFileNames: 'cli.mjs',
+        chunkFileNames: 'chunks/cli-[name].mjs',
+        assetFileNames: 'assets/cli-[name].[ext]',
+      },
+    },
   },
 ])
