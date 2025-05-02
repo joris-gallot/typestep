@@ -156,14 +156,16 @@ export function getOutput({ tscErrors, ignoredFilesWithoutErrors, ignoredTsError
   }
 
   if (ignoredTsErrorCodesHasErrors) {
-    consola.error('The following tsc error codes were ignored in the config but had no errors in the tsc output:')
+    consola.error('The following error codes were ignored in the config but had no errors in the tsc output:')
     consola.box(ignoredTsErrorCodesWithoutErrors.join('\n'))
   }
 
   if (tscHasErrors) {
     const errorFiles = uniqArray(tscErrors.map(({ path }) => path))
 
-    consola.error(`Found ${tscErrors.length} tsc errors in ${errorFiles.length} files:`)
+    const errorFilesString = errorFiles.length > 1 ? `${errorFiles.length} files` : '1 file'
+    const tscErrorsString = tscErrors.length > 1 ? `${tscErrors.length} errors` : '1 error'
+    consola.error(`Found ${tscErrorsString} in ${errorFilesString}:`)
     consola.box(errorFiles.join('\n'))
 
     if (config?.fullOutputErrors)
@@ -179,7 +181,7 @@ export function checkConfig(config: TypestepConfig) {
   const duplicateIgnoredTsErrorCodes = uniqArray(ignoredTsErrorCodes.filter((code, index, self) => self.indexOf(code) !== index))
 
   if (duplicateIgnoredTsErrorCodes.length > 0) {
-    consola.warn('The following tsc error codes were ignored more than once in the `ignoredTsErrorCodes` config:')
+    consola.warn('The following error codes were ignored more than once in the `ignoredTsErrorCodes` config:')
     consola.box(duplicateIgnoredTsErrorCodes.join('\n'))
   }
 }

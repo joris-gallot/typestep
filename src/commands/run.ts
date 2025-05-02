@@ -49,7 +49,7 @@ export async function run(tscOutputFile: string) {
   if (exit)
     process.exit(1)
 
-  consola.success('No tsc errors found')
+  consola.success('No errors found')
 }
 
 export default defineCommand({

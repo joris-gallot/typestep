@@ -41,7 +41,7 @@ describe('checkConfig', () => {
     })
 
     expect(consola.warn).toHaveBeenCalledTimes(1)
-    expect(consola.warn).toHaveBeenCalledWith('The following tsc error codes were ignored more than once in the `ignoredTsErrorCodes` config:')
+    expect(consola.warn).toHaveBeenCalledWith('The following error codes were ignored more than once in the `ignoredTsErrorCodes` config:')
     expect(consola.box).toHaveBeenCalledTimes(1)
     expect(consola.box).toHaveBeenCalledWith('TS1234')
   })
@@ -56,7 +56,7 @@ describe('checkConfig', () => {
     })
 
     expect(consola.warn).toHaveBeenCalledTimes(1)
-    expect(consola.warn).toHaveBeenCalledWith('The following tsc error codes were ignored more than once in the `ignoredTsErrorCodes` config:')
+    expect(consola.warn).toHaveBeenCalledWith('The following error codes were ignored more than once in the `ignoredTsErrorCodes` config:')
     expect(consola.box).toHaveBeenCalledTimes(1)
     expect(consola.box).toHaveBeenCalledWith('TS1234\nTS5678')
   })
