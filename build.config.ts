@@ -14,8 +14,8 @@ export default defineBuildConfig([
     rollup: {
       output: {
         entryFileNames: 'cli.mjs',
-        chunkFileNames: 'chunks/cli-[name].mjs',
-        assetFileNames: 'assets/cli-[name].[ext]',
+        chunkFileNames: 'chunks/[name].mjs',
+        assetFileNames: 'assets/[name].[ext]',
       },
     },
   },
