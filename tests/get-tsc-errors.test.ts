@@ -37,7 +37,6 @@ describe('ignored files and codes', () => {
     expect(ignoredFilesWithoutErrors).toStrictEqual([
       {
         file: 'non-existent-file.ts',
-        missingCodes: [],
         type: 'all',
       },
     ])
@@ -55,12 +54,10 @@ describe('ignored files and codes', () => {
     expect(ignoredFilesWithoutErrors).toStrictEqual([
       {
         file: 'non-existent-file.ts',
-        missingCodes: [],
         type: 'all',
       },
       {
         file: 'another-non-existent-file.ts',
-        missingCodes: [],
         type: 'all',
       },
     ])
@@ -102,7 +99,6 @@ describe('ignored files and codes', () => {
     expect(ignoredFilesWithoutErrors).toStrictEqual([
       {
         file: 'non-existent-file.ts',
-        missingCodes: [],
         type: 'all',
       },
     ])
@@ -218,7 +214,6 @@ describe('ignored files and codes', () => {
       },
       {
         file: 'non-existent-file.ts',
-        missingCodes: [],
         type: 'all',
       },
     ])
@@ -232,13 +227,7 @@ describe('ignored files and codes', () => {
       },
     })
 
-    expect(ignoredFilesWithoutErrors).toStrictEqual([
-      {
-        file: 'src/App.vue',
-        missingCodes: ['TS2769'],
-        type: 'codes',
-      },
-    ])
+    expect(ignoredFilesWithoutErrors).toStrictEqual([])
   })
 
   it('file with custom filter that matches no errors', async () => {
@@ -248,13 +237,7 @@ describe('ignored files and codes', () => {
       },
     })
 
-    expect(ignoredFilesWithoutErrors).toStrictEqual([
-      {
-        file: 'src/App.vue',
-        missingCodes: ['TS2339', 'TS2571', 'TS2339', 'TS2769'],
-        type: 'codes',
-      },
-    ])
+    expect(ignoredFilesWithoutErrors).toStrictEqual([])
   })
 
   it('file with custom filter that matches some errors', async () => {
@@ -264,13 +247,7 @@ describe('ignored files and codes', () => {
       },
     })
 
-    expect(ignoredFilesWithoutErrors).toStrictEqual([
-      {
-        file: 'src/App.vue',
-        missingCodes: ['TS2571', 'TS2769'],
-        type: 'codes',
-      },
-    ])
+    expect(ignoredFilesWithoutErrors).toStrictEqual([])
   })
 
   it('multiple files with different custom filter configurations', async () => {
@@ -284,18 +261,7 @@ describe('ignored files and codes', () => {
 
     expect(ignoredFilesWithoutErrors).toStrictEqual([
       {
-        file: 'src/App.vue',
-        missingCodes: ['TS2571', 'TS2769'],
-        type: 'codes',
-      },
-      {
-        file: 'src/components/Button.test.tsx',
-        missingCodes: ['TS2339', 'TS2571', 'TS2339', 'TS2339'],
-        type: 'codes',
-      },
-      {
         file: 'non-existent-file.ts',
-        missingCodes: [],
         type: 'all',
       },
     ])
@@ -315,13 +281,7 @@ describe('ignored files and codes', () => {
 
     expect(ignoredFilesWithoutErrors).toStrictEqual([
       {
-        file: 'src/App.vue',
-        missingCodes: ['TS2571', 'TS2769'],
-        type: 'codes',
-      },
-      {
         file: 'non-existent-file.ts',
-        missingCodes: [],
         type: 'all',
       },
       {
