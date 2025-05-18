@@ -53,3 +53,6 @@ The `typestep run` command analyzes the tsc output file and compares it with you
 ```bash
 typestep run tsc-output.log
 ```
+
+## License
+MIT
