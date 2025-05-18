@@ -4,12 +4,15 @@
     "config:recommended"
   ],
   "rangeStrategy": "bump",
-  "automerge": true,
   "packageRules": [
     {
       "matchPackageNames": ["@types/node"],
       "matchUpdateTypes": ["patch"],
       "enabled": false
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
     }
   ]
 }
