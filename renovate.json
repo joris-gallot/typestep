@@ -4,6 +4,7 @@
     "config:recommended"
   ],
   "rangeStrategy": "bump",
+  "automergeType": "branch",
   "packageRules": [
     {
       "matchPackageNames": ["@types/node"],
