@@ -163,7 +163,7 @@ export function getOutput({ tscErrors, ignoredFilesWithoutErrors, ignoredTsError
     consola.error('The following files were ignored in the config but had no errors in the tsc output:')
     const output = ignoredFilesWithoutErrors.map((result) => {
       if (result.type === 'all') {
-        return `${result.file} (no errors found)`
+        return result.file
       }
 
       const { missingCodes } = result
