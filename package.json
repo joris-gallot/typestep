@@ -25,7 +25,7 @@
     "dist"
   ],
   "engines": {
-    "node": "22.17.1"
+    "node": "24.4.1"
   },
   "scripts": {
     "playground": "jiti playground.ts",
