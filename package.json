@@ -2,7 +2,7 @@
   "name": "typestep",
   "type": "module",
   "version": "0.5.2",
-  "packageManager": "pnpm@10.18.1",
+  "packageManager": "pnpm@10.18.2",
   "description": "Simplifies JavaScript to TypeScript migration with incremental changes",
   "author": "Joris Gallot",
   "license": "MIT",
