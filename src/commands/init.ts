@@ -25,7 +25,7 @@ export async function generateInitialConfig(tscOutputFile: string): Promise<Type
   return { ignoredFiles }
 }
 
-/* v8 ignore next 11 - ignore coverage for writeFile */
+/* v8 ignore next -- @preserve ignore coverage for writeFile */
 export async function initConfig(tscOutputFile: string) {
   const config = await generateInitialConfig(tscOutputFile)
 
@@ -50,7 +50,7 @@ export default defineCommand({
       required: true,
     },
   },
-  /* v8 ignore next 13 - ignore coverage as it should be run from CLI */
+  /* v8 ignore next - ignore coverage as it should be run from CLI */
   run({ args }) {
     if (!existsSync(args.tsc_output_file))
       throw new Error('Tsc output file not found')

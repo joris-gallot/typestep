@@ -30,7 +30,7 @@ export async function readConfigFile() {
   return configModule as TypestepConfig
 }
 
-/* v8 ignore next 20 - ignore coverage as it should be run from CLI */
+/* v8 ignore next -- @preserve ignore coverage as it should be run from CLI */
 export async function run(tscOutputFile: string) {
   const tscOutput = await readFile(tscOutputFile, 'utf8')
   const config = await readConfigFile()
@@ -64,7 +64,7 @@ export default defineCommand({
       required: true,
     },
   },
-  /* v8 ignore next 6 - ignore coverage as it should be run from CLI */
+  /* v8 ignore next - ignore coverage as it should be run from CLI */
   run({ args }) {
     if (!existsSync(args.tsc_output_file))
       throw new Error('Tsc output file not found')
