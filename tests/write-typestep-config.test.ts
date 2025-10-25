@@ -12,7 +12,7 @@ describe('writeTypestepConfig', () => {
     }
 
     const expected = `import type { TypestepConfig } from 'typestep'
-  
+
 export default {
   "ignoredFiles": {
     "src/file1.ts": true,
@@ -29,7 +29,7 @@ export default {
     }
 
     const expected = `import type { TypestepConfig } from 'typestep'
-  
+
 export default {
   "ignoredTsErrorCodes": [
     "TS1234",
@@ -50,7 +50,7 @@ export default {
     }
 
     const expected = `import type { TypestepConfig } from 'typestep'
-  
+
 export default {
   "ignoredFiles": {
     "src/file1.ts": true,
@@ -71,7 +71,7 @@ export default {
     }
 
     const expected = `import type { TypestepConfig } from 'typestep'
-  
+
 export default {
   "ignoredTsErrorCodes": []
 } satisfies TypestepConfig`
@@ -86,7 +86,7 @@ export default {
     }
 
     const expected = `import type { TypestepConfig } from 'typestep'
-  
+
 export default {} satisfies TypestepConfig`
 
     expect(writeTypestepConfig(config)).toBe(expected)
@@ -101,7 +101,7 @@ export default {} satisfies TypestepConfig`
     }
 
     const expected = `import type { TypestepConfig } from 'typestep'
-  
+
 export default {
   "ignoredFiles": {
     "src/file1.ts": true
@@ -122,7 +122,7 @@ export default {
     }
 
     const expected = `import type { TypestepConfig } from 'typestep'
-  
+
 export default {
   "ignoredFiles": {
     "src/file1.ts": {
@@ -152,7 +152,7 @@ export default {
     }
 
     const expected = `import type { TypestepConfig } from 'typestep'
-  
+
 export default {
   "ignoredFiles": {
     "src/file1.ts": {
