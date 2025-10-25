@@ -24,7 +24,7 @@ export function tscErrorToString(tscError: TscError) {
 
 export function writeTypestepConfig(config: TypestepConfig) {
   return `import type { TypestepConfig } from 'typestep'
-  
+
 export default ${JSON.stringify(config, null, 2)} satisfies TypestepConfig`
 }
 
