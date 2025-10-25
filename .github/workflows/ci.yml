@@ -1,4 +1,4 @@
-name: 🔨
+name: CI
 
 on:
   pull_request:
@@ -6,12 +6,13 @@ on:
     branches:
       - main
     paths-ignore:
-      - '**/*.md'
-      - '**/*.gitignore'
+      - "**/*.md"
+      - "**/*.gitignore"
       - LICENSE
 
 jobs:
   typecheck:
+    name: Typecheck
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +25,7 @@ jobs:
         run: pnpm typecheck
 
   lint:
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -36,6 +38,7 @@ jobs:
         run: pnpm lint
 
   tests:
+    name: Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -48,6 +51,7 @@ jobs:
         run: pnpm test
 
   build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
