@@ -43,7 +43,7 @@
     "jiti": "^2.6.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.0.0",
+    "@antfu/eslint-config": "^6.2.0",
     "@types/node": "^22.18.0",
     "@vitest/coverage-v8": "^4.0.13",
     "eslint": "^9.38.0",
