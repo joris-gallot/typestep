@@ -46,7 +46,7 @@
     "@antfu/eslint-config": "^6.6.1",
     "@types/node": "^24.10.1",
     "@vitest/coverage-v8": "^4.0.15",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.2",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1",
     "vitest": "^4.0.15"
