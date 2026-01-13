@@ -45,10 +45,10 @@
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.3",
     "@types/node": "^24.10.1",
-    "@vitest/coverage-v8": "^4.0.16",
+    "@vitest/coverage-v8": "^4.0.17",
     "eslint": "^9.39.2",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1",
-    "vitest": "^4.0.16"
+    "vitest": "^4.0.17"
   }
 }
