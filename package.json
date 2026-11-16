@@ -25,7 +25,7 @@
     "dist"
   ],
   "engines": {
-    "node": "24.13.0"
+    "node": "24.22.3"
   },
   "scripts": {
     "playground": "jiti playground.ts",
@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^7.2.0",
-    "@types/node": "^24.10.1",
+    "@types/node": "^24.19.2",
     "@vitest/coverage-v8": "^4.0.18",
     "eslint": "^9.39.2",
     "typescript": "^5.9.3",
